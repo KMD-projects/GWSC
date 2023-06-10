@@ -2,6 +2,8 @@
 
 include('db/query.php');
 
+session_start();
+
 if (isset($_POST['btnLogin'])) {
 
     $email = $_POST['txtEmail'];
@@ -9,11 +11,24 @@ if (isset($_POST['btnLogin'])) {
 
     $customer = getCustomer($email, $password);
 
+    $failedCount = $_SESSION['customer_login_failed_count'] ?? 0;
+
     if ($customer != null) {
-        echo "Logged in successful!";
+        $_SESSION['logged_in_customer_id'] = $customer->id;
+        echo "<script>window.alert('Logged in successful!')</script>";
+        echo "<script>window.location='index.php'</script>";
     } else {
         if (isCustomerExists($email)) {
-            echo "Incorrect password!";
+            $failedCount++;
+            $_SESSION['customer_login_failed_count'] = $failedCount;
+            $remainingAttempt = 3 - $failedCount;
+            if ($failedCount < 3) {
+                echo "<script>window.alert('Login failed. Incorrect password. (Remaining attempt: $remainingAttempt)')</script>";
+            } else {
+                $_SESSION['customer_login_failed_count'] = 0;
+                echo "<script>window.alert('Login failed. Incorrect password. (Remaining attempt: $remainingAttempt)')</script>";
+                echo "<script>window.location='LoginTimer.php'</script>";
+            }
         } else {
             echo "No account found with this email. Would you like to register?";
         }

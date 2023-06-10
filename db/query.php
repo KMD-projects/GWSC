@@ -69,6 +69,7 @@ function getCustomer($email, $password): ?Customer
     $cols = mysqli_fetch_array($getResult);
     if (mysqli_num_rows($getResult) > 0) {
         $customer = new Customer();
+        $customer->id = $cols['customer_id'];
         $customer->firstname = $cols['first_name'];
         $customer->lastname = $cols['surname'];
         $customer->email = $cols['email'];
