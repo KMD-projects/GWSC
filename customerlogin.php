@@ -4,33 +4,36 @@ include('db/query.php');
 
 session_start();
 
+$error = "";
+
 if (isset($_POST['btnLogin'])) {
 
     $email = $_POST['txtEmail'];
-    $password = $_POST['txtPassword'];
+    $password = md5($_POST['txtPassword']);
 
     $customer = getCustomer($email, $password);
 
     $failedCount = $_SESSION['customer_login_failed_count'] ?? 0;
 
     if ($customer != null) {
-        $_SESSION['logged_in_customer_id'] = $customer->id;
-        echo "<script>window.alert('Logged in successful!')</script>";
-        echo "<script>window.location='index.php'</script>";
+        $error = "";
+        $_SESSION['logged_in_user_id'] = $customer->id;
+        $_SESSION['logged_in_username'] = $customer->firstname;
+        header('location: index.php');
     } else {
         if (isCustomerExists($email)) {
             $failedCount++;
             $_SESSION['customer_login_failed_count'] = $failedCount;
             $remainingAttempt = 3 - $failedCount;
-            if ($failedCount < 3) {
-                echo "<script>window.alert('Login failed. Incorrect password. (Remaining attempt: $remainingAttempt)')</script>";
-            } else {
+
+            if ($remainingAttempt == 0) {
                 $_SESSION['customer_login_failed_count'] = 0;
-                echo "<script>window.alert('Login failed. Incorrect password. (Remaining attempt: $remainingAttempt)')</script>";
-                echo "<script>window.location='LoginTimer.php'</script>";
+                header('location: LoginTimer.php');
+                exit();
             }
+            $error = "Login failed. Incorrect password. (Remaining attempt: $remainingAttempt)";
         } else {
-            echo "No account found with this email. Would you like to register?";
+            $error = "No account found with this email. Would you like to register?";
         }
     }
 }
@@ -46,6 +49,13 @@ if (isset($_POST['btnLogin'])) {
     <title>Customer register</title>
 </head>
 <body>
+<?php if (!empty($error)) : ?>
+    <div>
+        <?php
+        echo $error;
+        ?>
+    </div>
+<?php endif ?>
 <form action="customerlogin.php" method="POST">
 
     <label for="email">Email: </label>
@@ -57,5 +67,6 @@ if (isset($_POST['btnLogin'])) {
     <input type="submit" name="btnLogin" value="Login">
     <input type="reset" name="btnReset" value="Cancel">
 </form>
+<a href="customerregister.php">Register</a>
 </body>
 </html>

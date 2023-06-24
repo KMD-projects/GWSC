@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="styles/rss_style.css">
+    <link rel="stylesheet" type="text/css" href="css/rss_style.css">
 
 </head>
 <body>
 <header>
-    <?php include 'navbar.html'; ?>
+    <?php include 'navbar.php'; ?>
 </header>
 <div class="content">
 

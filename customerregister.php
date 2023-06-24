@@ -1,5 +1,7 @@
 <?php
 
+global $connect;
+
 use db\model\Customer;
 
 include('db/query.php');
@@ -7,12 +9,12 @@ include('db/query.php');
 if (isset($_POST['btnRegister'])) {
 
     $customer = new Customer();
-    $customer->firstname = $_POST['txtFirstname'];
-    $customer->lastname = $_POST['txtLastname'];
-    $customer->email = $_POST['txtEmail'];
-    $customer->password = $_POST['txtPassword'];
-    $customer->phone = $_POST['txtPhone'];
-    $customer->address = $_POST['txtAddress'];
+    $customer->firstname = mysqli_real_escape_string($connect, $_POST['txtFirstname']);
+    $customer->lastname = mysqli_real_escape_string($connect, $_POST['txtLastname']);
+    $customer->email = mysqli_real_escape_string($connect, $_POST['txtEmail']);
+    $customer->password = md5(mysqli_real_escape_string($connect, $_POST['txtPassword']));
+    $customer->phone = mysqli_real_escape_string($connect, $_POST['txtPhone']);
+    $customer->address = mysqli_real_escape_string($connect, $_POST['txtAddress']);
 
     if (isCustomerExists($customer->email)) {
         echo "<script>window.alert('Customer with email already existed.')</script>";
