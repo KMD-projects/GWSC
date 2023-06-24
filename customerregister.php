@@ -1,30 +1,35 @@
 <?php
 
-global $connect;
+global $connect, $dataSiteKey;
 
 use db\model\Customer;
 
 include('db/query.php');
+include('recaptcha.php');
 
 $error = "";
 
 if (isset($_POST['btnRegister'])) {
-
-    $customer = new Customer();
-    $customer->firstname = mysqli_real_escape_string($connect, $_POST['txtFirstname']);
-    $customer->lastname = mysqli_real_escape_string($connect, $_POST['txtLastname']);
-    $customer->email = mysqli_real_escape_string($connect, $_POST['txtEmail']);
-    $customer->password = md5(mysqli_real_escape_string($connect, $_POST['txtPassword']));
-    $customer->phone = mysqli_real_escape_string($connect, $_POST['txtPhone']);
-    $customer->address = mysqli_real_escape_string($connect, $_POST['txtAddress']);
-
-    if (isCustomerExists($customer->email)) {
-        $error = "An account with email (".$customer->email.") already existed.";
+    $recaptchaResult = processRecaptcha();
+    if (!empty($recaptchaResult)) {
+        $error = $recaptchaResult;
     } else {
-        if (insertCustomer($customer)) {
-            header('location: customerlogin.php');
+        $customer = new Customer();
+        $customer->firstname = mysqli_real_escape_string($connect, $_POST['txtFirstname']);
+        $customer->lastname = mysqli_real_escape_string($connect, $_POST['txtLastname']);
+        $customer->email = mysqli_real_escape_string($connect, $_POST['txtEmail']);
+        $customer->password = md5(mysqli_real_escape_string($connect, $_POST['txtPassword']));
+        $customer->phone = mysqli_real_escape_string($connect, $_POST['txtPhone']);
+        $customer->address = mysqli_real_escape_string($connect, $_POST['txtAddress']);
+
+        if (isCustomerExists($customer->email)) {
+            $error = "An account with email (" . $customer->email . ") already existed.";
         } else {
-            $error = "Failed to create an account.";
+            if (insertCustomer($customer)) {
+                header('location: customerlogin.php');
+            } else {
+                $error = "Failed to create an account.";
+            }
         }
     }
 }
@@ -40,6 +45,7 @@ if (isset($_POST['btnRegister'])) {
     <title>Customer register</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/9cfc40fa5c.js" crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="login-body">
 <main class="container">
@@ -47,22 +53,32 @@ if (isset($_POST['btnRegister'])) {
     <h3 class="center-text margin-top-8">Create New Account</h3>
     <form action="customerregister.php" method="POST">
         <label for="name" class="block gwsc-input-label">Firstname</label>
-        <input class="gwsc-input margin-top-4" id="name" type="text" name="txtFirstname" placeholder="Enter firstname" required/>
+        <input class="gwsc-input margin-top-4" id="name" type="text" name="txtFirstname" placeholder="Enter firstname"
+               required/>
 
         <label for="name" class="block gwsc-input-label margin-top-8">Lastname</label>
-        <input class="gwsc-input margin-top-4" id="name" type="text" name="txtLastname" placeholder="Enter lastname" required/>
+        <input class="gwsc-input margin-top-4" id="name" type="text" name="txtLastname" placeholder="Enter lastname"
+               required/>
 
         <label for="email" class="block gwsc-input-label margin-top-8">Email</label>
-        <input class="gwsc-input margin-top-4" id="email" type="email" name="txtEmail" placeholder="Enter email" required/>
+        <input class="gwsc-input margin-top-4" id="email" type="email" name="txtEmail" placeholder="Enter email"
+               required/>
 
         <label for="password" class="block gwsc-input-label margin-top-8">Password</label>
-        <input class="gwsc-input margin-top-4" id="password" type="password" name="txtPassword" placeholder="Enter password" required/>
+        <input class="gwsc-input margin-top-4" id="password" type="password" name="txtPassword"
+               placeholder="Enter password" required/>
 
         <label for="phone" class="block gwsc-input-label margin-top-8">Phone</label>
-        <input class="gwsc-input margin-top-4" id="phone" type="tel" name="txtPhone" placeholder="Enter phone" required/>
+        <input class="gwsc-input margin-top-4" id="phone" type="tel" name="txtPhone" placeholder="Enter phone"
+               required/>
 
         <label for="address" class="block gwsc-input-label margin-top-8">Address</label>
-        <input class="gwsc-input margin-top-4" id="address" type="text" name="txtAddress" placeholder="Enter address" required /><br>
+        <input class="gwsc-input margin-top-4" id="address" type="text" name="txtAddress" placeholder="Enter address"
+               required/><br>
+
+        <?php
+        echo '<div class="g-recaptcha margin-top-16" data-sitekey="'.$dataSiteKey.'"></div>';
+        ?>
 
         <input class="btn-lg-filled margin-top-18" type="submit" name="btnRegister" value="Register">
     </form>

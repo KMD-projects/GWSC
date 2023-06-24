@@ -1841,3 +1841,7 @@ strike::before {
     background-color: #45a049;
     color: #45a049;
 }
+
+.gwsc-corner {
+    border-radius: 20px;
+}
