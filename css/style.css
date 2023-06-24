@@ -2,6 +2,8 @@
 
 :root {
     --primary: #212121;
+    --secondary: #00BFFF;
+    --error: #A80000;
 }
 
 * {
@@ -47,7 +49,7 @@ nav {
 }
 
 .menu li a:hover {
-    color: #00BFFF;
+    color: var(--secondary);
 }
 
 .login-section {
@@ -1678,6 +1680,36 @@ strike::before {
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.200);
 }
 
+.btn-lg-filled {
+    width: 300px;
+    height: 40px;
+    display: block;
+    border-style: none;
+    background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.btn-lg-outlined {
+    width: 300px;
+    height: 40px;
+    display: block;
+    border: 2px solid;
+    border-color: var(--primary);
+    background-color: transparent;
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+
 /* Style for the banner container */
 .banner-container {
     width: 100%;
@@ -1724,4 +1756,84 @@ strike::before {
     margin-top: 20px;
     gap: 40px;
     text-align: center;
+}
+
+/*Login*/
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(rgba(0, 191, 255, 0.05), rgba(33, 33, 33, 0.7)), url('../images/bg-login.jpg'), no-repeat;
+    background-size: cover;
+}
+
+.login-body .container {
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 40px;
+    border-radius: 20px;
+}
+
+/*common styles*/
+.center-text {
+    text-align: center;
+}
+
+.block {
+    display: block;
+}
+
+.margin-top-18 {
+    margin-top: 18px;
+}
+
+.margin-top-16 {
+    margin-top: 16px;
+}
+
+.margin-top-12 {
+    margin-top: 12px;
+}
+
+.margin-top-8 {
+    margin-top: 8px;
+}
+
+.margin-top-4 {
+    margin-top: 4px;
+}
+
+.margin-0 {
+    margin: 0px;
+}
+
+.gwsc-input-label {
+    padding: 0px 10px;
+}
+
+.gwsc-input {
+    padding: 5px 10px;
+    width: 300px;
+    height: 40px;
+    letter-spacing: 1px;
+    border-radius: 200px;
+    border-style: none;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.gwsc-error {
+    max-width: 300px;
+    color: var(--error);
+    font-size: 12px;
+}
+
+::placeholder {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0;
+}
+
+.divider-silver {
+    background-color: #45a049;
+    color: #45a049;
 }

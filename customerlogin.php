@@ -4,7 +4,7 @@ include('db/query.php');
 
 session_start();
 
-$error = "";
+$error = "No account found with this email. Would you like to register?";
 
 if (isset($_POST['btnLogin'])) {
 
@@ -47,26 +47,35 @@ if (isset($_POST['btnLogin'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer register</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/9cfc40fa5c.js" crossorigin="anonymous"></script>
 </head>
-<body>
-<?php if (!empty($error)) : ?>
-    <div>
-        <?php
-        echo $error;
-        ?>
-    </div>
-<?php endif ?>
-<form action="customerlogin.php" method="POST">
+<body class="login-body">
+<main class="container">
+    <h1 class="center-text margin-0">GWSC</h1>
+    <h3 class="center-text margin-top-8">Login</h3>
+    <form action="customerlogin.php" method="POST">
 
-    <label for="email">Email: </label>
-    <input id="email" type="email" name="txtEmail" placeholder="Enter email" required/><br>
+        <label for="email" class="block gwsc-input-label">Email</label>
+        <input class="gwsc-input margin-top-4" id="email" type="email" name="txtEmail" placeholder="Enter email"
+               required/>
 
-    <label for="password">Password: </label>
-    <input id="password" type="password" name="txtPassword" placeholder="Enter password" required/><br>
+        <label for="password" class="block margin-top-12 gwsc-input-label">Password</label>
+        <input class="gwsc-input margin-top-4" id="password" type="password" name="txtPassword"
+               placeholder="Enter password" required/>
 
-    <input type="submit" name="btnLogin" value="Login">
-    <input type="reset" name="btnReset" value="Cancel">
-</form>
-<a href="customerregister.php">Register</a>
+        <input class="btn-lg-filled margin-top-18" type="submit" name="btnLogin" value="Login">
+    </form>
+    <?php if (!empty($error)) : ?>
+        <div class="gwsc-error center-text margin-top-8">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <?php
+            echo $error;
+            ?>
+        </div>
+    <?php endif ?>
+    <span class="block center-text margin-top-18">Don't have an account yet?</span>
+    <button class="btn-lg-outlined margin-top-8" onclick="location.href='customerregister.php'">Register</button>
+</main>
 </body>
 </html>
