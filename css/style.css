@@ -1770,9 +1770,13 @@ strike::before {
 }
 
 .login-body .container {
-    background-color: rgba(255, 255, 255, 0.4);
-    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 40px 80px;
     border-radius: 20px;
+}
+
+.login-body .container h1,h3 {
+    color: var(--primary);
 }
 
 /*common styles*/

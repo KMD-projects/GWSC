@@ -2,14 +2,16 @@
 
 include('db/query.php');
 
+global $connect;
+
 session_start();
 
-$error = "No account found with this email. Would you like to register?";
+$error = "";
 
 if (isset($_POST['btnLogin'])) {
 
-    $email = $_POST['txtEmail'];
-    $password = md5($_POST['txtPassword']);
+    $email = mysqli_real_escape_string($connect, $_POST['txtEmail']);
+    $password = md5(mysqli_real_escape_string($connect, $_POST['txtPassword']));
 
     $customer = getCustomer($email, $password);
 
