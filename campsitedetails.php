@@ -33,12 +33,7 @@ $features = getFeatures($campsiteId);
 
     <section class="campsite-detail-container">
         <?php
-        $image = "placeholder.svg";
-        if (!empty($campsite->images)) {
-            $image = $campsite->images[0];
-        }
-
-        echo '<img alt="campsite image" class="image" src="images/' . $image . '">';
+        echo '<img alt="campsite image" class="image" src="' . $campsite->image . '">';
         echo '<h1>' . $campsite->name . '</h1>';
         echo '<h4>' . $campsite->location . '</h4>';
         echo '<p>' . $campsite->description . '</p>'
@@ -58,13 +53,19 @@ $features = getFeatures($campsiteId);
             <?php
             foreach ($pitches as $pitch) {
                 echo '<div class="item">';
-                echo '<img alt="image" class="image" src="images/' . $image . '">';
+                echo '<img alt="image" class="image" src="' . $pitch->image . '">';
                 echo '<div class="content">';
-                echo '<p>' . $pitch->name . '</p>';
-                echo '<p>' . $pitch->type . '</p>';
-                echo '<p>' . $pitch->groundType . '</p>';
-                echo '<p>' . $pitch->description . '</p>';
-                echo '<button class="rounded-border-button-primary">Book</button>';
+                echo '<h3>' . $pitch->name . '</h3>';
+                echo '<span class="chip-filled">' . $pitch->type . '</span>';
+                echo '<span class="chip-filled">' . $pitch->groundType . '</span>';
+                echo '<span class="max-lines-2 margin-top-8">' . $pitch->description . '</span>';
+                echo '<form action="bookingpage.php" method="post">';
+                echo '<input type="hidden" name="pitch_id" value="' . $pitch->id . '">';
+                echo '<div class="grid-container-2 margin-top-12">';
+                echo '<span>from <span class="price-small">$' . $pitch->price . '</span></span>';
+                echo '<button class="btn-sm-filled margin-bot-8" type="submit">Book</button>';
+                echo '</div>';
+                echo '</form>';
                 echo '</div>';
                 echo '</div>';
             }
@@ -76,12 +77,11 @@ $features = getFeatures($campsiteId);
             <?php
             foreach ($attractions as $attraction) {
                 echo '<div class="item">';
-                echo '<img alt="image" class="image" src="images/' . $image . '">';
+                echo '<img alt="image" class="image" src="' . $attraction->image . '">';
                 echo '<div class="content">';
                 echo '<span>' . $attraction->name . '</span><br>';
-                echo '<span>' . $attraction->distance . ' miles</span><br>';
+                echo '<span class="chip-filled">' . $attraction->distance . ' miles</span><br>';
                 echo '<span>' . $attraction->description . '</span><br>';
-                echo '<button class="rounded-border-button-primary">View</button>';
                 echo '</div>';
                 echo '</div>';
             }
@@ -98,13 +98,13 @@ $features = getFeatures($campsiteId);
                 echo '<img alt="reviewer image" src="images/cool.png">';
 
                 echo '<div class="content">';
-                echo '<span>'.$review->userId.'</span><br>';
-                echo '<span>Reviewed '.$review->date.'</span>';
+                echo '<span>' . $review->userId . '</span><br>';
+                echo '<span>Reviewed ' . $review->date . '</span>';
                 echo '</div>';
 
                 echo '</div>';
 
-                echo '<h3 class="title">'.$review->title.'</h3>';
+                echo '<h3 class="title">' . $review->title . '</h3>';
                 echo '<div class="rating">';
                 echo '<i class="fa-solid fa-star fa-sm"></i>';
                 echo '<i class="fa-solid fa-star fa-sm"></i>';
@@ -112,7 +112,7 @@ $features = getFeatures($campsiteId);
                 echo '<i class="fa-solid fa-star fa-sm"></i>';
                 echo '<i class="fa-regular fa-star fa-sm"></i>';
                 echo '</div>';
-                echo '<p class="description">'.$review->description.'</p>';
+                echo '<p class="description">' . $review->description . '</p>';
                 echo '</div>';
             }
             ?>
@@ -126,5 +126,8 @@ $features = getFeatures($campsiteId);
 
 </main>
 <?php include 'footer.html'; ?>
+<script>
+    changePageNameFooter("Campsite");
+</script>
 </body>
 </html>

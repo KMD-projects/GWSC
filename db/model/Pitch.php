@@ -20,4 +20,6 @@ class Pitch
     public $image;
 
     public $campsiteId;
+
+    public $price;
 }

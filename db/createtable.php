@@ -57,9 +57,6 @@ function createCampsitesTable()
         name VARCHAR(50),
         location TEXT NOT NULL,
         description TEXT NOT NULL,
-        tent_capacity INT NOT NULL,
-        caravan_capacity INT NOT NULL,
-        motor_home_capacity INT NOT NULL,
         price INT NOT NULL,
         createdAt DATETIME NOT NULL,
         updatedAt DATETIME NOT NULL
@@ -105,5 +102,54 @@ function createCampFeaturesTable() {
         echo "<p>Camp Features table created!</p>";
     } else {
         echo "<p>Camp Features table failed to create.</p>";
+    }
+}
+
+function createPitchTable() {
+    global $connect;
+    $query = "CREATE TABLE pitches
+    (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(50),
+        capacity INTEGER,
+        description TEXT,
+        type VARCHAR(10),
+        groundType VARCHAR(20),
+        image TEXT,
+        price INT NOT NULL,
+        campsite_id INT NOT NULL,
+        created_at DATETIME NOT NULL,
+        updated_at DATETIME NOT NULL,
+        FOREIGN KEY (campsite_id) REFERENCES campsites(id)
+    )";
+
+    $result = mysqli_query($connect, $query);
+    if ($result) {
+        echo "<p>Pitch table created!</p>";
+    } else {
+        echo "<p>Pitch table failed to create.</p>";
+    }
+}
+
+function createAttractionTable() {
+    global $connect;
+    $query = "CREATE TABLE attractions
+    (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(50),
+        description TEXT,
+        distance INTEGER,
+        image TEXT,
+        campsite_id INT NOT NULL,
+        created_at DATETIME NOT NULL,
+        updated_at DATETIME NOT NULL,
+        FOREIGN KEY (campsite_id) REFERENCES campsites(id)
+    )";
+
+    $result = mysqli_query($connect, $query);
+    if ($result) {
+        echo "<p>Attraction table created!</p>";
+    } else {
+        echo "<p>Attraction table failed to create.</p>";
     }
 }

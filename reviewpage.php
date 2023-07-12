@@ -17,6 +17,7 @@ $reviews = getReviews("");
     <title>Reviews</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/9cfc40fa5c.js" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
 </head>
 
 <body>
@@ -32,7 +33,7 @@ $reviews = getReviews("");
             <div class="item">
                 <div class="content">
                     <div class="review-profile">
-                        <img alt="reviewer image" class="review-avatar" src="images/sample-avatar.jpg">
+                        <img alt="reviewer image" class="review-avatar" src="images/cool.png">
                         <div class="review-name">
                             <h3>Christopher Nolan</h3>
                             <h5>Reviewed Mar 5, 2022</h5><br>
@@ -66,13 +67,16 @@ $reviews = getReviews("");
                     <label class="review-input-label" for="message">Review</label><br>
                     <textarea id="message" placeholder="Type your review" class="styled-textarea"
                               required></textarea><br><br>
-                    <button type="submit" class="rounded-border-button-2">Send</button>
+                    <button type="submit" class="btn-sm-filled">Send</button>
                 </form>
             </div>
         </div>
     </section>
 </main>
 <?php include 'footer.html'; ?>
+<script>
+    changePageNameFooter("Review");
+</script>
 </body>
 
 </html>

@@ -12,6 +12,7 @@ class Review
 
     public $userId;
     public $campsiteId;
+    public $pitchId;
 
     public $date;
 }

@@ -451,33 +451,6 @@ figure {
     object-fit: contain;
 }
 
-.equiment-section {
-    grid-column: 2 / 3;
-    margin: 40px 0px;
-    position: relative;
-    background: linear-gradient(rgba(94, 55, 221, 0.459), rgba(32, 61, 177, 0.7)), url('../images/home-equiment-cover.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 300px;
-}
-
-.equiment-section-container {
-    text-align: center;
-    color: white;
-    width: 300px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-}
-
-.equiment-section-container h1 {
-}
-
-.equiment-section-container p {
-    margin-bottom: 20px;
-}
-
 .image-anim:hover img {
     transform: scale(0.9) rotate(5deg);
 }
@@ -1557,6 +1530,10 @@ strike::before {
     width: 100%;
     height: auto;
 }
+
+.campsite-detail-container .attractions .item .content {
+    margin: 12px;
+}
 /* attraction list */
 
 /* review list */
@@ -1624,60 +1601,23 @@ strike::before {
     text-overflow: ellipsis;
 }
 
+
+
+
+
 /*Buttons*/
-.rounded-border-button-transparent {
-    border-radius: 20px;
-    padding: 12px 40px 10px;
-    background-color: transparent;
-    border: 1px solid silver;
+
+.btn-sm-filled {
+    min-width: 100px;
+    height: 40px;
+    display: inline;
+    border-style: none;
+    background-color: var(--primary);
     color: white;
     text-decoration: none;
-}
-
-.rounded-border-button-transparent:hover {
-    background-color: var(--primary);
-    border-style: none;
-}
-
-.rounded-border-button-transparent-dark {
+    text-align: center;
     border-radius: 20px;
-    padding: 12px 40px 10px;
-    background-color: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.rounded-border-button-transparent-dark:hover {
-    background-color: var(--primary);
-    color: white;
-    border-style: none;
-}
-
-.rounded-border-button-white {
-    border-radius: 20px;
-    border-width: 0.5px;
-    padding: 12px 40px 10px;
-    background-color: white;
-}
-
-.rounded-border-button-white:hover {
-    background-color: var(--primary);
-    color: white;
-}
-
-
-.rounded-border-button-primary {
-    border-radius: 20px;
-    border-width: 0.5px;
-    padding: 12px 40px 10px;
-    background-color: var(--primary);
-    color: white;
-}
-
-.rounded-border-button-primary:hover {
-    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.200);
+    font-size: 18px;
 }
 
 .btn-lg-filled {
@@ -1687,7 +1627,25 @@ strike::before {
     border-style: none;
     background-color: var(--primary);
     color: white;
-    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.btn-sm-filled:hover, .btn-lg-filled:hover {
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.200);
+}
+
+.btn-sm-outlined {
+    width: 100px;
+    height: 40px;
+    padding: 4px 8px;
+    display: inline;
+    border: 2px solid;
+    border-color: var(--primary);
+    background-color: transparent;
+    color: var(--primary);
     text-decoration: none;
     text-align: center;
     border-radius: 20px;
@@ -1702,12 +1660,70 @@ strike::before {
     border-color: var(--primary);
     background-color: transparent;
     color: var(--primary);
-    font-weight: bold;
     text-decoration: none;
     text-align: center;
     border-radius: 20px;
     font-size: 18px;
 }
+
+.btn-sm-outlined:hover, .btn-lg-outlined:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-sm-outlined-white {
+    width: 100px;
+    height: 40px;
+    display: inline;
+    border: 1px solid;
+    border-color: white;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.btn-sm-outlined-white:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-success,
+.btn-error,
+.btn-warning,
+.btn-secondary {
+    color: white;
+    border-radius: 4px;
+    border-style: none;
+    padding: 4px 8px;
+    margin: 4px;
+}
+
+.btn-success {
+    background: rgb(28, 184, 65);
+    /* this is a green */
+}
+
+.btn-error {
+    background: rgb(202, 60, 60);
+    /* this is a maroon */
+}
+
+.btn-warning {
+    background: rgb(223, 117, 20);
+    /* this is an orange */
+}
+
+.btn-secondary {
+    background: rgb(66, 184, 221);
+    /* this is a light blue */
+}
+/*Buttons*/
+
+
+
 
 
 /* Style for the banner container */
@@ -1779,6 +1795,59 @@ strike::before {
     color: var(--primary);
 }
 
+/*booking price section*/
+.booking-account-section {
+    border-radius: 20px;
+    border: 1px solid silver;
+    height: auto;
+    width: 100%;
+    padding: 20px;
+}
+/*booking price section*/
+
+/*booking price section*/
+.booking-price-section {
+    border-radius: 20px;
+    border: 1px solid silver;
+    height: auto;
+    width: 100%;
+    padding: 20px;
+}
+/*booking price section*/
+
+/*payment info section*/
+
+.payment-options-section {
+    display: none;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.billing-section {
+    border-radius: 20px;
+    border: 1px solid silver;
+    height: auto;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.payment-section {
+    border-radius: 20px;
+    border: 1px solid silver;
+    height: auto;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.booking-btn-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
 /*common styles*/
 .center-text {
     text-align: center;
@@ -1786,6 +1855,14 @@ strike::before {
 
 .block {
     display: block;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
 }
 
 .margin-top-18 {
@@ -1812,8 +1889,20 @@ strike::before {
     margin: 0px;
 }
 
+.margin-bot-8 {
+    margin-bottom: 8px;
+}
+
 .gwsc-input-label {
     padding: 0px 10px;
+}
+
+.grid-gap-16 {
+    gap: 16px;
+}
+
+.match-parent-width {
+    width: 100%;
 }
 
 .gwsc-input {
@@ -1824,6 +1913,26 @@ strike::before {
     border-radius: 200px;
     border-style: none;
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.gwsc-input-filled {
+    padding: 5px 10px;
+    width: 300px;
+    height: 40px;
+    letter-spacing: 1px;
+    border-radius: 200px;
+    border-style: none;
+    background-color: #f2f2f2;
+}
+
+.gwsc-input-filled-full-width {
+    padding: 5px 10px;
+    width: 100%;
+    height: 40px;
+    letter-spacing: 1px;
+    border-radius: 200px;
+    border-style: none;
+    background-color: #f2f2f2;
 }
 
 .gwsc-error {
@@ -1844,4 +1953,59 @@ strike::before {
 
 .gwsc-corner {
     border-radius: 20px;
+}
+
+.chip-outlined {
+    border: 1px solid darkgray;
+    border-radius: 20px;
+    font-size: 14px;
+    padding: 4px 8px;
+    margin: 8px;
+}
+
+.chip-filled {
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    font-size: 14px;
+    padding: 4px 8px;
+}
+
+
+/* Admin */
+.data-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: var(--primary);
+    color: white;
+}
+
+td, th {
+    border: 1px solid #f2f2f2;
+    text-align: left;
+    padding: 8px;
+    max-width: 300px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.dashboard {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.dashboard div {
+    width: 300px;
+    text-align: center;
+}
+
+.dashboard div img {
+    width: 300px;
+    height: 300px;
 }

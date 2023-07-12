@@ -29,11 +29,7 @@ $campsites = getCampsites();
         <?php
         foreach ($campsites as $campsite) {
             echo '<div class="item">';
-            $image = "placeholder.svg";
-            if (!empty($campsite->images)) {
-                $image = $campsite->images[0];
-            }
-            echo '<img alt="campsite image" class="image" src="images/' . $image . '">';
+            echo '<img alt="campsite image" class="image" src="' . $campsite->image . '">';
             echo '<p class="name">' . $campsite->name . '</p>';
             echo '<span class="pitch-type">';
             echo $campsite->tentCapacity . ' Tents';
@@ -49,12 +45,15 @@ $campsites = getCampsites();
             echo '</div>';
             echo '<p><span class="price-small">$' . $campsite->price . '</span></p>';
             $detailPageUrl = 'campsitedetails.php?campsite_id=' . $campsite->id;
-            echo '<button onclick="window.location.href = \'' . $detailPageUrl . '\';" class="rounded-border-button-transparent-dark">View</button>';
+            echo '<button onclick="window.location.href = \'' . $detailPageUrl . '\';" class="btn-sm-filled">View</button>';
             echo '</div>';
         }
         ?>
     </div>
 </main>
 <?php include 'footer.html'; ?>
+<script>
+    changePageNameFooter("Campsites");
+</script>
 </body>
 </html>

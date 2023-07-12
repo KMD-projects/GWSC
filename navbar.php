@@ -6,20 +6,6 @@
 <head>
     <script src="https://kit.fontawesome.com/9cfc40fa5c.js" crossorigin="anonymous"></script>
 </head>
-<!--<nav id="hamnav">-->
-<!--    <label for="hamburger">&#9776;</label>-->
-<!--    <input type="checkbox" id="hamburger">-->
-<!--    <div id="hamitems">-->
-<!--        <a href="index.php">Home</a>-->
-<!--        <a href="">Information</a>-->
-<!--        <a href="campsitepage.php">Pitch Types</a>-->
-<!--        <a href="reviewpage.php">Reviews</a>-->
-<!--        <a href="">Features</a>-->
-<!--        <a href="">Contact</a>-->
-<!--        <a href="">Attractions</a>-->
-<!--        <a href="rsspage.php">RSS</a>-->
-<!--    </div>-->
-<!--</nav>-->
 <nav>
     <a href="index.php" class="home-icon">GWSC</a>
     <ul class="menu">

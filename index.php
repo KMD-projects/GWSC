@@ -16,6 +16,8 @@ $popularCampsites = array_slice($campsites, 0, 2);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GWSC</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/9cfc40fa5c.js" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 </head>
 
@@ -37,7 +39,7 @@ $popularCampsites = array_slice($campsites, 0, 2);
             <form action="searchresults.php" method="get">
                 <div class="search-container">
                     <input class="search-input" type="text" name="query" placeholder="Search..." required>
-                    <button type="submit" class="rounded-border-button-transparent">Go</button>
+                    <button type="submit" class="btn-sm-outlined-white">Go</button>
                 </div>
             </form>
         </div>
@@ -67,17 +69,15 @@ $popularCampsites = array_slice($campsites, 0, 2);
             <p>Bring your home away from home and park it in our spacious and convenient pitches.</p>
         </div>
     </section>
+
+    <!--Popular Campsites-->
     <section class="grid-2-3">
         <h1>Popular Campsites</h1>
         <div class="campsite-list">
         <?php
         foreach ($popularCampsites as $campsite) {
             echo '<div class="item">';
-            $image = "placeholder.svg";
-            if (!empty($campsite->images)) {
-                $image = $campsite->images[0];
-            }
-            echo '<img alt="campsite image" class="image" src="images/' . $image . '">';
+            echo '<img alt="campsite image" class="image" src="' . $campsite->image . '">';
             echo '<p class="name">' . $campsite->name . '</p>';
             echo '<span class="pitch-type">';
             echo $campsite->tentCapacity . ' Tents';
@@ -93,7 +93,7 @@ $popularCampsites = array_slice($campsites, 0, 2);
             echo '</div>';
             echo '<p><span class="price-small">$' . $campsite->price . '</span></p>';
             $detailPageUrl = 'campsitedetails.php?campsite_id=' . $campsite->id;
-            echo '<button onclick="window.location.href = \'' . $detailPageUrl . '\';" class="rounded-border-button">View</button>';
+            echo '<button onclick="window.location.href = \'' . $detailPageUrl . '\';" class="btn-sm-filled">View</button>';
             echo '</div>';
         }
         ?>
@@ -118,7 +118,7 @@ $popularCampsites = array_slice($campsites, 0, 2);
         </div>
         <div class="signup">
             <input class="search-input" type="text" name="query" placeholder="Your email" required>
-            <button type="submit" class="rounded-border-button-transparent">Sign up</button>
+            <button type="submit" class="btn-sm-outlined-white">Sign up</button>
         </div>
 <!--        <div class="signup">-->
 <!--            <input class="styled-input-2" type="email" id="signup-email" name="email" placeholder="Your email">-->
@@ -127,6 +127,9 @@ $popularCampsites = array_slice($campsites, 0, 2);
     </div>
 </main>
 <?php include 'footer.html'; ?>
+<script>
+    changePageNameFooter("Home");
+</script>
 </body>
 
 </html>

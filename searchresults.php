@@ -42,16 +42,12 @@ if (isset($_GET['query'])) {
 
             foreach ($campsites as $campsite) {
                 echo '<div class="item">';
-                $image = "placeholder.svg";
-                if (!empty($campsite->images)) {
-                    $image = $campsite->images[0];
-                }
-                echo '<img alt="campsite image" class="image" src="images/' . $image . '">';
+                echo '<img alt="campsite image" class="image" src="' . $campsite->image . '">';
                 echo '<p class="name">' . $campsite->name . '</p>';
                 echo '<p class="description">' . $campsite->description . '</p>';
                 echo '<p><span class="price-small">$' . $campsite->price . '</span></p>';
                 $detailPageUrl = 'campsitedetails.php?campsite_id=' . $campsite->id;
-                echo '<button onclick="window.location.href = \'' . $detailPageUrl . '\';" class="rounded-border-button-primary">View</button>';
+                echo '<button onclick="window.location.href = \'' . $detailPageUrl . '\';" class="btn-sm-filled">View</button>';
                 echo '</div>';
             }
             echo '</div>';

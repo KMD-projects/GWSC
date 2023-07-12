@@ -33,7 +33,6 @@ if (isset($_POST['btnRegister'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin register</title>
-    <link rel="stylesheet" href="css/auth_style.css">
 </head>
 <body class="auth-form-body">
 <div class="auth-form-container">

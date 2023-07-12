@@ -71,6 +71,9 @@
     ?>
 </div>
 <?php include 'footer.html'; ?>
+<script>
+    changePageNameFooter("RSS");
+</script>
 </body>
 </html>
 

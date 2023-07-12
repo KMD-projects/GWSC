@@ -1,12 +1,12 @@
 <?php
 
 use db\model\Admin;
-use db\model\Customer;
+use db\model\Attraction;
 use db\model\Campsite;
+use db\model\Customer;
+use db\model\Feature;
 use db\model\Pitch;
 use db\model\Review;
-use db\model\Attraction;
-use db\model\Feature;
 
 include('connect.php');
 include('model/Admin.php');
@@ -29,8 +29,7 @@ function isAdminExists($email): bool
 function insertAdmin(Admin $admin): bool
 {
     global $connect;
-    $timestamp = date('Y-m-d H:i:s');
-    $insertAdmin = "insert into admins (name, email, password, phone, address, createdAt, updatedAt) values ('$admin->name', '$admin->email', '$admin->password', '$admin->phone', '$admin->address', '$timestamp', '$timestamp')";
+    $insertAdmin = "insert into admins (name, email, password, phone, address, createdAt, updatedAt) values ('$admin->name', '$admin->email', '$admin->password', '$admin->phone', '$admin->address', now(), now())";
     return mysqli_query($connect, $insertAdmin);
 }
 
@@ -68,10 +67,17 @@ function isCustomerExists($email): bool
 function insertCustomer(Customer $customer): bool
 {
     global $connect;
-    $timestamp = date('Y-m-d H:i:s');
     $insertCustomer = "insert into customers (first_name, surname, email, password, phone, address, createdAt, updatedAt)
-                        values ('$customer->firstname', '$customer->lastname', '$customer->email', '$customer->password', '$customer->phone', '$customer->address', '$timestamp', '$timestamp');";
+                        values ('$customer->firstname', '$customer->lastname', '$customer->email', '$customer->password', '$customer->phone', '$customer->address', now(), now());";
     return mysqli_query($connect, $insertCustomer);
+}
+
+function getAllCustomers(): array
+{
+    global $connect;
+    $getQuery = "select * from customers";
+    $result = mysqli_query($connect, $getQuery);
+    return mapCustomers($result);
 }
 
 function getCustomer($email, $password): ?Customer
@@ -81,17 +87,7 @@ function getCustomer($email, $password): ?Customer
     $getResult = mysqli_query($connect, $getQuery);
     $cols = mysqli_fetch_array($getResult);
     if (mysqli_num_rows($getResult) > 0) {
-        $customer = new Customer();
-        $customer->id = $cols['customer_id'];
-        $customer->firstname = $cols['first_name'];
-        $customer->lastname = $cols['surname'];
-        $customer->email = $cols['email'];
-        $customer->password = $cols['password'];
-        $customer->phone = $cols['phone'];
-        $customer->address = $cols['address'];
-        $customer->createdAt = $cols['createdAt'];
-        $customer->updatedAt = $cols['updatedAt'];
-        return $customer;
+        return mapCustomer($cols);
     } else {
         return null;
     }
@@ -104,29 +100,59 @@ function getCustomerProfile($userId): ?Customer
     $getResult = mysqli_query($connect, $getQuery);
     $cols = mysqli_fetch_array($getResult);
     if (mysqli_num_rows($getResult) > 0) {
-        $customer = new Customer();
-        $customer->id = $cols['customer_id'];
-        $customer->firstname = $cols['first_name'];
-        $customer->lastname = $cols['surname'];
-        $customer->email = $cols['email'];
-        $customer->password = $cols['password'];
-        $customer->phone = $cols['phone'];
-        $customer->address = $cols['address'];
-        $customer->createdAt = $cols['createdAt'];
-        $customer->updatedAt = $cols['updatedAt'];
-        return $customer;
+        return mapCustomer($cols);
     } else {
         return null;
     }
 }
 
+function deleteCustomer($userId): bool
+{
+    global $connect;
+    $query = "delete from customers where customer_id = '$userId'";
+    return mysqli_query($connect, $query);
+}
+
+function mapCustomers($result): array
+{
+    $count = mysqli_num_rows($result);
+    $customers = array();
+    for ($i = 0; $i < $count; $i++) {
+        $row = mysqli_fetch_array($result);
+        $customer = mapCustomer($row);
+        $customers[] = $customer;
+    }
+    return $customers;
+}
+
+function mapCustomer($row): ?Customer
+{
+    $customer = new Customer();
+    $customer->id = $row['customer_id'];
+    $customer->firstname = $row['first_name'];
+    $customer->lastname = $row['surname'];
+    $customer->email = $row['email'];
+    $customer->password = $row['password'];
+    $customer->phone = $row['phone'];
+    $customer->address = $row['address'];
+    $customer->createdAt = $row['createdAt'];
+    $customer->updatedAt = $row['updatedAt'];
+    return $customer;
+}
+
 function insertCampsite(Campsite $campsite): bool
 {
     global $connect;
-    $timestamp = date('Y-m-d H:i:s');
-    $insertCustomer = "insert into campsites (name, location, description, tent_capacity, caravan_capacity, motor_home_capacity, price, createdAt, updatedAt) 
-                        values ('$campsite->name', '$campsite->location', '$campsite->description', '$campsite->tentCapacity', '$campsite->caravanCapacity', '$campsite->motorHomeCapacity', '$campsite->price', '$timestamp', '$timestamp');";
+    $insertCustomer = "insert into campsites (name, location, description, image, price, createdAt, updatedAt) 
+                        values ('$campsite->name', '$campsite->location', '$campsite->description', '$campsite->image', '$campsite->price', now(), now());";
     return mysqli_query($connect, $insertCustomer);
+}
+
+function deleteCampsite($campsiteId): bool
+{
+    global $connect;
+    $query = "delete from campsites where id = '$campsiteId'";
+    return mysqli_query($connect, $query);
 }
 
 function getCampsite($campsiteId): ?Campsite
@@ -165,62 +191,140 @@ function mapCampsites($result): array
     for ($i = 0; $i < $count; $i++) {
         $row = mysqli_fetch_array($result);
         $campsite = mapCampsite($row);
+        $pitches = getPitches($campsite->id);
+        $tentCount = 0;
+        $caravanCount = 0;
+        $motorHomeCount = 0;
+        foreach ($pitches as $pitch) {
+            switch ($pitch->type) {
+                case "Tent":
+                    $tentCount++;
+                    break;
+                case "Motorhome":
+                    $motorHomeCount++;
+                    break;
+                case "Caravan":
+                    $caravanCount++;
+                    break;
+            }
+        }
+        $campsite->attractions = getAttractions($campsite->id);
+        $campsite->tentCapacity = $tentCount;
+        $campsite->caravanCapacity = $caravanCount;
+        $campsite->motorHomeCapacity = $motorHomeCount;
         $campsites[] = $campsite;
     }
     return $campsites;
 }
 
-function mapCampsite($row): Campsite {
+function mapCampsite($row): Campsite
+{
     $campsite = new Campsite();
     $campsite->id = $row['id'];
     $campsite->name = $row['name'];
     $campsite->location = $row['location'];
     $campsite->description = $row['description'];
-    $campsite->tentCapacity = $row['tent_capacity'];
-    $campsite->caravanCapacity = $row['caravan_capacity'];
-    $campsite->motorHomeCapacity = $row['motor_home_capacity'];
     $campsite->price = $row['price'];
+    $campsite->image = $row['image'];
     $campsite->createdAt = $row['createdAt'];
     $campsite->updatedAt = $row['updatedAt'];
-
-    $images = array();
-    $images[] = "test.jpg";
-    $campsite->images = $images;
     return $campsite;
+}
+
+function insertPitch(Pitch $pitch): bool
+{
+    global $connect;
+    $query = "insert into pitches (name, capacity, description, type, groundType, image, price, campsite_id, created_at, updated_at) 
+                        values ('$pitch->name', '$pitch->capacity', '$pitch->description', '$pitch->type', '$pitch->groundType', '$pitch->image', '$pitch->price', '$pitch->campsiteId', now(), now());";
+    return mysqli_query($connect, $query);
 }
 
 function getPitches($campsiteId): array
 {
+    global $connect;
+    $getQuery = "select * from pitches where campsite_id = '$campsiteId'";
+    $result = mysqli_query($connect, $getQuery);
+    return mapPitches($result);
+}
+
+function getPitch($pitchId): ?Pitch
+{
+    global $connect;
+    $getQuery = "select * from pitches where id = '$pitchId'";
+    $getResult = mysqli_query($connect, $getQuery);
+    $cols = mysqli_fetch_array($getResult);
+    if (mysqli_num_rows($getResult) > 0) {
+        return mapPitch($cols);
+    } else {
+        return null;
+    }
+}
+
+function mapPitches($result): array
+{
+    $count = mysqli_num_rows($result);
     $pitches = array();
-    for ($i = 0; $i < 5; $i++) {
-        $pitch = new Pitch();
-        $pitch->id = $i;
-        $pitch->name = "Pitch ".$i;
-        $pitch->capacity = 10;
-        $pitch->description = "Escape from messy desks, busy inboxes and fume-filled commutes with a peaceful fresh-air stay among grownups only at Barley Meadow Touring Park, a dog-friendly site under five minutes’ drive from the Devon village of Crockernwell.";
-        $pitch->type = "tent";
-        $pitch->groundType = "Grass";
-        $pitch->image = "test.jpg";
-        $pitch->campsiteId = $campsiteId;
+    for ($i = 0; $i < $count; $i++) {
+        $row = mysqli_fetch_array($result);
+        $pitch = mapPitch($row);
         $pitches[] = $pitch;
     }
     return $pitches;
 }
 
+function mapPitch($row): Pitch
+{
+    $pitch = new Pitch();
+    $pitch->id = $row['id'];
+    $pitch->name = $row['name'];
+    $pitch->capacity = $row['capacity'];
+    $pitch->description = $row['description'];
+    $pitch->type = $row['type'];
+    $pitch->groundType = $row['groundType'];
+    $pitch->image = $row['image'];
+    $pitch->price = $row['price'];
+    $pitch->campsiteId = $row['campsite_id'];
+    return $pitch;
+}
+
+function insertAttraction(Attraction $attraction): bool
+{
+    global $connect;
+    $query = "insert into attractions (name, description, distance, image, campsite_id, created_at, updated_at) 
+                        values ('$attraction->name', '$attraction->description', '$attraction->distance', '$attraction->image', '$attraction->campsiteId', now(), now());";
+    return mysqli_query($connect, $query);
+}
+
 function getAttractions($campsiteId): array
 {
+    global $connect;
+    $getQuery = "select * from attractions where campsite_id = '$campsiteId'";
+    $result = mysqli_query($connect, $getQuery);
+    return mapAttractions($result);
+}
+
+function mapAttractions($result): array
+{
+    $count = mysqli_num_rows($result);
     $attractions = array();
-    for ($i = 0; $i < 3; $i++) {
-        $attraction = new Attraction();
-        $attraction->id = $i;
-        $attraction->name = "Attraction ".$i;
-        $attraction->description = "Standing 6,200 feet high in the fog belt in the Kula Forest Reserve, Polipoli Spring State Recreation Area may remind you of the conifer forests on the shorelines of the Pacific Northwest. The extensive trail systems here reward trekkers with sweeping views of Central and West Maui, Kahoʻolawe, Molokaʻi, and Lanaʻi (in clear conditions). You’ll definitely want to pack comfortable shoes and some musubi for some serious island snacking. Mountain bikers may particularly enjoy the Redwood Trail which offers a look at an old ranger’s station. We recommend four-wheel drive vehicles, extra warm clothing, and donning your brightest threads. Seasonal bird, wild boar, and feral goat hunting is permitted. Drinking water is not supplied in the park so be prepared to provide your own.";
-        $attraction->image = "test.jpg";
-        $attraction->distance = 3;
-        $attraction->campsiteId = $campsiteId;
+    for ($i = 0; $i < $count; $i++) {
+        $row = mysqli_fetch_array($result);
+        $attraction = mapAttraction($row);
         $attractions[] = $attraction;
     }
     return $attractions;
+}
+
+function mapAttraction($row): Attraction
+{
+    $attraction = new Attraction();
+    $attraction->id = $row['id'];
+    $attraction->name = $row['name'];
+    $attraction->description = $row['description'];
+    $attraction->distance = $row['distance'];
+    $attraction->image = $row['image'];
+    $attraction->campsiteId = $row['campsite_id'];
+    return $attraction;
 }
 
 function getReviews($campsiteId): array
@@ -229,7 +333,7 @@ function getReviews($campsiteId): array
     for ($i = 0; $i < 10; $i++) {
         $review = new Review();
         $review->id = $i;
-        $review->title = "Review ".$i;
+        $review->title = "Review " . $i;
         $review->description = "aadkfjalfjajdskfjasdl;fasdfasdlfajsdfjsa;dfja;sdfj";
         $review->rating = 3;
         $timestamp = date('Y-m-d H:i:s');
@@ -241,11 +345,18 @@ function getReviews($campsiteId): array
     return $reviews;
 }
 
+function insertFeature(Feature $feature): bool
+{
+    global $connect;
+    $query = "insert into features (name) values ('$feature->name');";
+    return mysqli_query($connect, $query);
+}
+
 function getFeatures($campsiteId): array
 {
     $features = array();
     global $connect;
-    $getQuery = "select * from features as f join camp_features as cf on f.id = cf.feature_id where cf.campsite_id = ".$campsiteId;
+    $getQuery = "select * from features as f join camp_features as cf on f.id = cf.feature_id where cf.campsite_id = " . $campsiteId;
     $result = mysqli_query($connect, $getQuery);
     $count = mysqli_num_rows($result);
     for ($i = 0; $i < $count; $i++) {
@@ -257,4 +368,29 @@ function getFeatures($campsiteId): array
         $features[] = $feature;
     }
     return $features;
+}
+
+function getAllFeatures(): array
+{
+    $features = array();
+    global $connect;
+    $getQuery = "select * from features";
+    $result = mysqli_query($connect, $getQuery);
+    $count = mysqli_num_rows($result);
+    for ($i = 0; $i < $count; $i++) {
+        $row = mysqli_fetch_array($result);
+        $feature = new Feature();
+        $feature->id = $row['id'];
+        $feature->name = $row['name'];
+        $feature->icon = "";
+        $features[] = $feature;
+    }
+    return $features;
+}
+
+function deleteFeature($featureId): bool
+{
+    global $connect;
+    $query = "delete from features where id = '$featureId'";
+    return mysqli_query($connect, $query);
 }

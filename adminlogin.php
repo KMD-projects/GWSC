@@ -29,7 +29,6 @@ if (isset($_POST['btnLogin'])) {
 <html lang="en">
 <head>
     <title>Admin Login</title>
-    <link rel="stylesheet" href="css/auth_style.css">
 </head>
 <body class="auth-form-body">
 <div class="auth-form-container">

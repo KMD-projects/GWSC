@@ -8,8 +8,13 @@ class Campsite
     public $location;
     public $description;
     public $price;
-    public $createdAt;
-    public $updatedAt;
+    public $image;
+    public $tentCapacity;
+    public $caravanCapacity;
+    public $motorHomeCapacity;
 
-    public $images;
+    public $attractions;
+    public $createdAt;
+
+    public $updatedAt;
 }
