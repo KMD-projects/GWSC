@@ -93,11 +93,61 @@ function deleteCampsite(btn) {
 
 function createFeature() {
     let featureName = $("#txtFeatureName").val();
-    console.log(`Name::::${featureName}`);
     $.post({
         url: "action/createfeature.php",
         data: {
             feature_name: featureName
+        },
+        success: function () {
+            console.log(`Success`);
+            location.reload();
+        }
+    });
+}
+
+function createBooking(campsiteId, pitchId, userId) {
+    let guestCount = $("#guest").val();
+    console.log(`guestCount: ${guestCount}`);
+    let pitchPrice = $("#price").text();
+    console.log(`pitchPrice: ${pitchPrice}`);
+    let taxPrice = $("#tax-fee").text();
+    console.log(`taxPrice: ${taxPrice}`);
+    let serviceFee = $("#service-fee").text();
+    console.log(`serviceFee: ${serviceFee}`);
+    let totalPrice = $("#total-fee").text();
+    console.log(`totalPrice: ${totalPrice}`);
+    $.post({
+        url: "action/createbooking.php",
+        data: {
+            guest_count: guestCount,
+            pitch_price: pitchPrice,
+            tax_price: taxPrice,
+            service_fee: serviceFee,
+            total_price: totalPrice,
+            campsite_id: campsiteId,
+            pitch_id: pitchId,
+            user_id: userId,
+        },
+        success: function () {
+            console.log(`Success`);
+        }
+    });
+}
+
+function acceptBooking(btn) {
+    updateBooking(btn.id, "accepted")
+}
+
+function declineBooking(btn) {
+    updateBooking(btn.id, "declined")
+}
+
+function updateBooking(bookingId, status) {
+    $.post({
+        url: "action/updatebookingstatus.php",
+        data: {
+            booking_id: bookingId,
+            booking_status: status
         },
         success: function () {
             console.log(`Success`);

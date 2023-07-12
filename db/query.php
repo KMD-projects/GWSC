@@ -7,6 +7,7 @@ use db\model\Customer;
 use db\model\Feature;
 use db\model\Pitch;
 use db\model\Review;
+use db\model\Booking;
 
 include('connect.php');
 include('model/Admin.php');
@@ -16,6 +17,7 @@ include('model/Pitch.php');
 include('model/Review.php');
 include('model/Attraction.php');
 include('model/Feature.php');
+include('model/Booking.php');
 
 function isAdminExists($email): bool
 {
@@ -234,8 +236,8 @@ function mapCampsite($row): Campsite
 function insertPitch(Pitch $pitch): bool
 {
     global $connect;
-    $query = "insert into pitches (name, capacity, description, type, groundType, image, price, campsite_id, created_at, updated_at) 
-                        values ('$pitch->name', '$pitch->capacity', '$pitch->description', '$pitch->type', '$pitch->groundType', '$pitch->image', '$pitch->price', '$pitch->campsiteId', now(), now());";
+    $query = "insert into pitches (name, description, duration, type, groundType, image, price, campsite_id, created_at, updated_at) 
+                        values ('$pitch->name', '$pitch->description', '$pitch->duration', '$pitch->type', '$pitch->groundType', '$pitch->image', '$pitch->price', '$pitch->campsiteId', now(), now());";
     return mysqli_query($connect, $query);
 }
 
@@ -277,8 +279,21 @@ function mapPitch($row): Pitch
     $pitch = new Pitch();
     $pitch->id = $row['id'];
     $pitch->name = $row['name'];
-    $pitch->capacity = $row['capacity'];
     $pitch->description = $row['description'];
+    switch ($row['duration']) {
+        case "one-d":
+            $pitch->duration = "1 day";
+            break;
+        case "three-d":
+            $pitch->duration = "3 days";
+            break;
+        case "one-w":
+            $pitch->duration = "1 week";
+            break;
+        case "two-w":
+            $pitch->duration = "2 weeks";
+            break;
+    }
     $pitch->type = $row['type'];
     $pitch->groundType = $row['groundType'];
     $pitch->image = $row['image'];
@@ -393,4 +408,101 @@ function deleteFeature($featureId): bool
     global $connect;
     $query = "delete from features where id = '$featureId'";
     return mysqli_query($connect, $query);
+}
+
+function insertBooking(Booking $booking): bool
+{
+    global $connect;
+    $query = "insert into bookings (
+                         guest_count,
+                         pitch_price,
+                         tax_price,
+                         service_fee,
+                         total_price,
+                         status,
+                         date,
+                         campsite_id,
+                         pitch_id,
+                         user_id,
+                         created_at,
+                         updated_at
+                         ) values (
+                                   '$booking->guestCount',
+                                   '$booking->pitchPrice',
+                                   '$booking->taxPrice',
+                                   '$booking->serviceFee',
+                                   '$booking->totalPrice',
+                                   '$booking->status',
+                                   now(),
+                                   '$booking->campsiteId',
+                                   '$booking->pitchId',
+                                   '$booking->userId',
+                                   now(),
+                                   now());";
+    return mysqli_query($connect, $query);
+}
+
+function getAllBookings(): array
+{
+    global $connect;
+    $getQuery = "select * from bookings;";
+    $result = mysqli_query($connect, $getQuery);
+    return mapBookings($result);
+}
+
+function findBooking($pitchId, $userId): ?Booking
+{
+    global $connect;
+    $getQuery = "select * from bookings where pitch_id = ".$pitchId." and user_id = ".$userId.";";
+    $result = mysqli_query($connect, $getQuery);
+    $cols = mysqli_fetch_array($result);
+    if (mysqli_num_rows($result) > 0) {
+        return mapBooking($cols);
+    } else {
+        return null;
+    }
+}
+
+function updateBookingStatus($bookingId, $status): bool
+{
+    global $connect;
+    $getQuery = "update bookings set status = '$status' where id = '$bookingId';";
+    return mysqli_query($connect, $getQuery);
+}
+
+function mapBookings($result): array
+{
+    $count = mysqli_num_rows($result);
+    $bookings = array();
+    for ($i = 0; $i < $count; $i++) {
+        $row = mysqli_fetch_array($result);
+        $booking = mapBooking($row);
+        $bookings[] = $booking;
+    }
+    return $bookings;
+}
+
+function mapBooking($row): Booking
+{
+    $booking = new Booking();
+    $booking->id = $row['id'];
+    $booking->guestCount = $row['guest_count'];
+    $booking->pitchPrice = $row['pitch_price'];
+    $booking->taxPrice = $row['tax_price'];
+    $booking->serviceFee = $row['service_fee'];
+    $booking->totalPrice = $row['total_price'];
+    $booking->status = $row['status'];
+    $booking->date = $row['date'];
+    $booking->campsiteId = $row['campsite_id'];
+    $campsite = getCampsite($booking->campsiteId);
+    $booking->campsiteName = $campsite->name;
+    $booking->pitchId = $row['pitch_id'];
+    $pitch = getPitch($booking->pitchId);
+    $booking->pitchName = $pitch->name;
+    $booking->userId = $row['user_id'];
+    $user = getCustomerProfile($booking->userId);
+    $booking->username = $user->firstname;
+    $booking->createdAt = $row['created_at'];
+    $booking->updatedAt = $row['updated_at'];
+    return $booking;
 }

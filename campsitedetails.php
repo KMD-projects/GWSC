@@ -62,7 +62,7 @@ $features = getFeatures($campsiteId);
                 echo '<form action="bookingpage.php" method="post">';
                 echo '<input type="hidden" name="pitch_id" value="' . $pitch->id . '">';
                 echo '<div class="grid-container-2 margin-top-12">';
-                echo '<span>from <span class="price-small">$' . $pitch->price . '</span></span>';
+                echo '<span><span class="price-small">$' . $pitch->price . '</span> for '.$pitch->duration.'</span>';
                 echo '<button class="btn-sm-filled margin-bot-8" type="submit">Book</button>';
                 echo '</div>';
                 echo '</form>';

@@ -8,7 +8,7 @@ class Pitch
 
     public $name;
 
-    public $capacity;
+    public $duration;
 
     public $description;
 

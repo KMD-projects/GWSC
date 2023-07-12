@@ -39,7 +39,7 @@ $campsites = getCampsites();
             echo '<td>' . sizeof($campsite->attractions) . '</td>';
             echo '<td>';
             echo '<button id="' . $campsite->id . '" class="btn-error" onclick="deleteCampsite(this)">Delete</button>';
-            echo '<button class="btn-success" onclick="navigateToAddPitch(\'' . $campsite->id . '\')">Add Pitch</button>';
+            echo '<button class="btn-success" onclick="navigateToAddPitch`(\'' . $campsite->id . '\')`">Add Pitch</button>';
             echo '<button class="btn-success" onclick="navigateToAddFeature(\'' . $campsite->id . '\')">Add Features</button>';
             echo '<button class="btn-success" onclick="navigateToAddAttraction(\'' . $campsite->id . '\')">Add Attractions</button>';
             echo '</td>';

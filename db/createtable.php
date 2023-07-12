@@ -111,7 +111,7 @@ function createPitchTable() {
     (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         name VARCHAR(50),
-        capacity INTEGER,
+        duration VARCHAR(20),
         description TEXT,
         type VARCHAR(10),
         groundType VARCHAR(20),
@@ -151,5 +151,35 @@ function createAttractionTable() {
         echo "<p>Attraction table created!</p>";
     } else {
         echo "<p>Attraction table failed to create.</p>";
+    }
+}
+
+function createBookingTable() {
+    global $connect;
+    $query = "CREATE TABLE bookings
+    (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        guest_count INT,
+        pitch_price INT,
+        tax_price INT,
+        service_fee INT,
+        total_price INT,
+        status VARCHAR(20),
+        date DATETIME NOT NULL,
+        campsite_id INT NOT NULL,
+        pitch_id INT NOT NULL,
+        user_id INT NOT NULL,
+        created_at DATETIME NOT NULL,
+        updated_at DATETIME NOT NULL,
+        FOREIGN KEY (campsite_id) REFERENCES campsites(id),
+        FOREIGN KEY (pitch_id) REFERENCES pitches(id),
+        FOREIGN KEY (user_id) REFERENCES customers(customer_id)
+    )";
+
+    $result = mysqli_query($connect, $query);
+    if ($result) {
+        echo "<p>Booking table created!</p>";
+    } else {
+        echo "<p>Booking table failed to create.</p>";
     }
 }

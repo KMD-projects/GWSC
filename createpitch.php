@@ -15,7 +15,7 @@ if (isset($_POST['btnCreate'])) {
 
     $pitch = new Pitch();
     $pitch->name = mysqli_real_escape_string($connect, $_POST['txtName']);
-    $pitch->capacity = mysqli_real_escape_string($connect, $_POST['txtCapacity']);
+    $pitch->duration = mysqli_real_escape_string($connect, $_POST['txtDuration']);
     $pitch->description = mysqli_real_escape_string($connect, $_POST['txtDescription']);
     $pitch->type = mysqli_real_escape_string($connect, $_POST['txtType']);
     $pitch->groundType = mysqli_real_escape_string($connect, $_POST['txtGroundType']);
@@ -52,8 +52,15 @@ if (isset($_POST['btnCreate'])) {
     <label for="name">Name: </label>
     <input id="name" type="text" name="txtName" placeholder="Enter name" required/><br>
 
-    <label for="capacity">Capacity: </label>
-    <input id="capacity" type="number" name="txtCapacity" placeholder="Enter capacity" required/><br>
+    <span>Duration: </span>
+    <input type="radio" id="one-d" name="txtDuration" value="one-d" checked>
+    <label for="one-d">One day</label>
+    <input type="radio" id="three-d" name="txtDuration" value="three-d">
+    <label for="three-d">Three days</label>
+    <input type="radio" id="one-w" name="txtDuration" value="one-w">
+    <label for="one-w">One week</label>
+    <input type="radio" id="two-w" name="txtDuration" value="two-w">
+    <label for="two-w">Two weeks</label><br>
 
     <label for="description">Description: </label>
     <input id="description" type="text" name="txtDescription" placeholder="Enter description" required/><br>
