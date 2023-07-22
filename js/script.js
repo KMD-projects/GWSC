@@ -37,7 +37,7 @@ function togglePaymentInfoVisibility() {
 
 function changePageNameFooter(currentPage) {
     const element = document.getElementById("page-name")
-    element.innerText = `You are at ${currentPage} page.`;
+    element.innerHTML = `You are at <strong><u>${currentPage}</u></strong> page.`;
 }
 
 function navigateToAddPitch(campsiteId) {

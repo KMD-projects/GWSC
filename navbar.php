@@ -9,10 +9,10 @@
 <nav>
     <a href="index.php" class="home-icon">GWSC</a>
     <ul class="menu">
-        <li><a href="#">Information</a></li>
+        <li><a href="informationpage.php">Information</a></li>
         <li><a href="campsitepage.php">Pitch Types</a></li>
         <li><a href="reviewpage.php#">Reviews</a></li>
-        <li><a href="#">Features</a></li>
+        <li><a href="featurespage.php">Features</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Attractions</a></li>
         <li><a href="rsspage.php">RSS</a></li>

@@ -1518,6 +1518,33 @@ strike::before {
 /* campsite detail */
 
 /* attraction list */
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.feature-item {
+    width: 200px;
+    padding: 40px 20px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 1.5em;
+    height: 160px;
+}
+
+.feature-item:hover {
+    border-radius: 20px;
+    background-color: var(--secondary);
+    border: none;
+    color: white;
+    font-size: 1.8em;
+    transition: 0.3s;
+}
+/* attraction list */
+
+
+/* attraction list */
 .campsite-detail-container .attractions {
     width: 100%;
     gap: 20px;
