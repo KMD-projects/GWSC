@@ -310,6 +310,14 @@ function insertAttraction(Attraction $attraction): bool
     return mysqli_query($connect, $query);
 }
 
+function getAllAttractions(): array
+{
+    global $connect;
+    $getQuery = "select * from attractions";
+    $result = mysqli_query($connect, $getQuery);
+    return mapAttractions($result);
+}
+
 function getAttractions($campsiteId): array
 {
     global $connect;

@@ -79,9 +79,9 @@ $features = getFeatures($campsiteId);
                 echo '<div class="item">';
                 echo '<img alt="image" class="image" src="' . $attraction->image . '">';
                 echo '<div class="content">';
-                echo '<span>' . $attraction->name . '</span><br>';
-                echo '<span class="chip-filled">' . $attraction->distance . ' miles</span><br>';
-                echo '<span>' . $attraction->description . '</span><br>';
+                echo '<span class="title">' . $attraction->name . '</span><br>';
+                echo '<span class="chip-filled distance">' . $attraction->distance . ' miles</span><br>';
+                echo '<p>' . $attraction->description . '</p><br>';
                 echo '</div>';
                 echo '</div>';
             }

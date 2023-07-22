@@ -14,7 +14,7 @@
         <li><a href="reviewpage.php#">Reviews</a></li>
         <li><a href="featurespage.php">Features</a></li>
         <li><a href="#">Contact</a></li>
-        <li><a href="#">Attractions</a></li>
+        <li><a href="attractionspage.php">Attractions</a></li>
         <li><a href="rsspage.php">RSS</a></li>
     </ul>
     <div class="login-section">

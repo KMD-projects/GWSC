@@ -277,7 +277,7 @@ figure {
 
 .grid-container-3-equal {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .grid-container-2 {
@@ -1545,12 +1545,12 @@ strike::before {
 
 
 /* attraction list */
-.campsite-detail-container .attractions {
+.attractions {
     width: 100%;
     gap: 20px;
 }
 
-.campsite-detail-container .attractions .item {
+.attractions .item {
     border: 1px solid silver;
     text-align: center;
     border-radius: 8px;
@@ -1558,8 +1558,22 @@ strike::before {
     height: auto;
 }
 
-.campsite-detail-container .attractions .item .content {
+.attractions .item img {
+    width: 100%;
+    border-radius: 0px;
+}
+
+.attractions .item .content {
     margin: 12px;
+}
+
+.attractions .item .content .title {
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+.attractions .item .content .distance {
+    margin-top: 20px;
 }
 /* attraction list */
 
