@@ -9,7 +9,7 @@ $campsite = getCampsite($campsiteId);
 $pitches = getPitches($campsiteId);
 $attractions = getAttractions($campsiteId);
 $reviews = getReviews($campsiteId);
-$features = getFeatures($campsiteId);
+$features = getAllFeatures();
 
 $user = null;
 if (isset($_SESSION['logged_in_user_id'])) {
@@ -56,7 +56,7 @@ if (isset($_SESSION['logged_in_user_id'])) {
         </div>
 
         <h1 class="margin-top-40">Pitches</h1>
-        <div class="pitches grid-container-2">
+        <div class="pitches">
             <?php
             foreach ($pitches as $pitch) {
                 echo '<div class="item">';
@@ -96,7 +96,8 @@ if (isset($_SESSION['logged_in_user_id'])) {
         </div>
 
         <h1 class="grid-2-3 margin-top-40">Write a review</h1>
-        <div class="grid-container-3-equal grid-gap-16">
+        <div class="contact-us-container">
+        <div class="user-info grid-gap-16">
             <div>
                 <label for="name" class="block gwsc-input-label">Name</label>
                 <?php
@@ -121,6 +122,7 @@ if (isset($_SESSION['logged_in_user_id'])) {
                        placeholder="Phone" readonly value="' . $user->phone . '"/>';
                 ?>
             </div>
+        </div>
         </div>
 
         <label for="title" class="block margin-top-12 gwsc-input-label">Title</label>

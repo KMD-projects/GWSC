@@ -6,6 +6,28 @@ $( document ).ready(function() {
     setupMenuClick();
 });
 
+// Function to check if the user has accepted cookies
+function checkCookieConsent() {
+    var consentCookie = getCookie('cookie_consent');
+    console.log(consentCookie);
+    return consentCookie !== null;
+}
+
+// Function to show the cookie popup if the user hasn't accepted cookies
+function showCookiePopup() {
+    if (!checkCookieConsent()) {
+        var popup = document.getElementById('cookiePopup');
+        popup.style.display = 'block';
+    }
+}
+
+// Function to accept cookies and hide the cookie popup
+function acceptCookies() {
+    setCookie('cookie_consent', 'accepted', 365); // Cookie will be valid for 365 days
+    var popup = document.getElementById('cookiePopup');
+    popup.style.display = 'none';
+}
+
 function setupMenuClick() {
     $("#hamburger").click(function(){
         let icon = $("#hamburger");

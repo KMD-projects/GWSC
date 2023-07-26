@@ -29,7 +29,7 @@ $reviews = getAllReviews();
     </div>
 </header>
 <main class="grid-container-3">
-    <section class="grid-2-3 grid-container-3-equal grid-gap-16 review-list">
+    <section class="grid-2-3 grid-gap-16 review-list">
         <?php
         foreach ($reviews as $review) {
             echo '<div class="item">';

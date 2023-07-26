@@ -29,7 +29,7 @@ $attractions = getAllAttractions();
     </div>
 </header>
 <main class="grid-container-3">
-    <div class="grid-container-3-equal attractions grid-2-3 margin-top-20">
+    <div class="attractions grid-2-3 margin-top-20">
         <?php
         foreach ($attractions as $attraction) {
             echo '<div class="item">';

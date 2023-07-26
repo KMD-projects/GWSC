@@ -34,10 +34,13 @@ if (isset($_GET['query'])) {
     <div class="grid-2-3">
         <?php
         if (empty($campsites)) {
-            echo '<div class="no-results-container">';
+            echo '<div class="search-results-container">';
             echo '<p class="no-results-message">No Results Found for "'.$searchQuery.'"</p>';
             echo '</div>';
         } else {
+            echo '<div class="search-results-container">';
+            echo '<p class="no-results-message">Results Found for "'.$searchQuery.'"</p>';
+            echo '</div>';
             echo '<div class="campsite-list">';
 
             foreach ($campsites as $campsite) {

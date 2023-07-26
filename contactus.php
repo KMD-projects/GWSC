@@ -50,9 +50,9 @@ if (isset($_POST['btnSend'])) {
 </header>
 <main class="grid-container-3">
     <h1 class="center-text grid-2-3">Send us a message</h1>
-    <form class="grid-2-3" action="contactus.php" method="POST">
+    <form class="contact-us-container" action="contactus.php" method="POST">
 
-        <div class="grid-container-3-equal grid-gap-16">
+        <div class="user-info grid-gap-16">
             <div>
                 <label for="name" class="block gwsc-input-label">Name</label>
                 <?php
@@ -89,7 +89,7 @@ if (isset($_POST['btnSend'])) {
 
         <input class="btn-lg-filled margin-top-18" type="submit" name="btnSend" value="Send message">
     </form>
-    <div class="grid-container-2 grid-2-3 margin-top-40">
+    <div class="tnc-container grid-2-3 margin-top-40">
         <a class="tnc-pp" href="privacy-policy.php">Privacy Policy</a>
         <a class="tnc-pp" href="terms-of-service.php">Terms of Service</a>
     </div>

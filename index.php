@@ -55,6 +55,14 @@ insertVisitedIp($visitedIp);
         <div><span class="show-off-value">4.2</span><br>Overall<br>Rating</div>
     </div>
 </header>
+<!-- Cookie Popup Modal -->
+<div class="modal" id="cookiePopup">
+    <div class="modal-content">
+        <h2>Cookie Usage</h2>
+        <p>This website uses cookies to enhance user experience. By using this website, you consent to the use of cookies in accordance with our Cookie Policy.</p>
+        <button class="modal-button" onclick="acceptCookies()">Accept</button>
+    </div>
+</div>
 <main class="grid-container-3">
     <section class="home-section-pitches">
         <div>
@@ -128,6 +136,7 @@ insertVisitedIp($visitedIp);
 </main>
 <?php include 'footer.php'; ?>
 <script>
+    showCookiePopup();
     changePageNameFooter("Home");
 </script>
 </body>

@@ -40,7 +40,7 @@ $booking = findBooking($pitchId, $user->id)
 <main class="grid-container-3">
     <section class="campsite-detail-container">
         <h1>Pitch Information</h1>
-        <div class="pitches">
+        <div class="pitch">
             <?php
             echo '<div class="item">';
             echo '<img alt="image" class="image" src="' . $pitch->image . '">';
@@ -55,7 +55,7 @@ $booking = findBooking($pitchId, $user->id)
         </div>
 
 
-        <div class="grid-container-2 grid-gap-16">
+        <div class="booking-info-container grid-gap-16">
             <div>
                 <h1 class="margin-top-40">Account Information</h1>
                 <div class="booking-account-section">
@@ -103,7 +103,7 @@ $booking = findBooking($pitchId, $user->id)
         <input type="radio" id="option_card" name="payment_method" value="card"
                onchange="togglePaymentInfoVisibility()">
         <label for="option_card">Card</label><br>
-        <div id="payment_section" class="grid-container-2 payment-options-section">
+        <div id="payment_section" class="payment-options-section">
             <div class="billing-section">
                 <h3>Billing address</h3>
                 <div class="grid-container-2 grid-gap-16">

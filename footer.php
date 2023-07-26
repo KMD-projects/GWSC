@@ -26,7 +26,6 @@ $visitorCount = getVisitorCount();
             <h6 class="footer-category">Information</h6>
             <div>
                 <a href="informationpage.php" class="footer-category-item hover-underline-animation">Information</a><br>
-                <a href="campsitepage.php" class="footer-category-item hover-underline-animation">Pitch Types</a><br>
                 <a href="featurespage.php" class="footer-category-item hover-underline-animation">Features</a><br>
                 <a href="attractionspage.php" class="footer-category-item hover-underline-animation">Attractions</a><br>
                 <a href="reviewpage.php" class="footer-category-item hover-underline-animation">Reviews</a><br>

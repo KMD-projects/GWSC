@@ -16,6 +16,14 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.max-lines-1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .max-lines-2 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -157,8 +165,8 @@ nav {
 }
 
 .hamburger {
-    color: white;
     display: none;
+    color: transparent;
 }
 
 .home-icon {
@@ -397,7 +405,6 @@ figure {
 
 .grid-container-2 {
     display: grid;
-    /* grid-template-columns: minmax(2rem, 1fr) minmax(min-content, 94rem) minmax(2rem, 1fr); */
     grid-template-columns: 1fr 1fr;
 }
 
@@ -568,7 +575,10 @@ footer .container {
     content: '"';
 }
 
-.review-list {}
+.review-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
 
 .review-list .item {
     border-radius: 10px;
@@ -662,7 +672,6 @@ footer .container {
 .campsite-list .item {
     border: 1px solid darkgray;
     border-radius: 8px;
-    width: 100%;
     text-align: center;
     padding: 0 0 20px 0;
 }
@@ -685,7 +694,7 @@ footer .container {
 
 .campsite-list .item .description {
     color: gray;
-    margin: 8px 16px 0 16px;
+    width: 100%;
 }
 
 .pitch-type {
@@ -696,6 +705,207 @@ footer .container {
     margin: 8px;
 }
 /* campsite list */
+
+/* attraction list */
+.attractions {
+    width: 100%;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.attractions .item {
+    border: 1px solid silver;
+    text-align: center;
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+}
+
+.attractions .item img {
+    width: 100%;
+    border-radius: 0px;
+}
+
+.attractions .item .content {
+    margin: 12px;
+}
+
+.attractions .item .content .title {
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+.attractions .item .content .distance {
+    margin-top: 20px;
+}
+/* attraction list */
+
+/* contact us */
+.contact-us-container {
+    grid-column: 2 / 3;
+    width: 100%;
+}
+
+.contact-us-container .user-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.tnc-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.tnc-pp {
+    border: 1px solid darkgray;
+    border-radius: 20px;
+    padding: 20px 40px;
+    margin: 8px;
+    font-size: 2em;
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.tnc-pp:hover {
+    background-color: var(--secondary);
+    border: none;
+    color: white;
+    font-size: 2.2em;
+    transition: 0.3s;
+}
+/* contact us */
+
+/* campsite detail */
+.campsite-detail-container {
+    grid-column: 2 / 3;
+    margin-top: 20px;
+}
+
+.campsite-detail-container .map {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+}
+
+.campsite-detail-container .image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.campsite-detail-container .pitch {
+    width: 100%;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.campsite-detail-container .pitches {
+    width: 100%;
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.campsite-detail-container .pitches .item {
+    border: 1px solid silver;
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.campsite-detail-container .pitches .item .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.campsite-detail-container .pitches .item .content {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.campsite-detail-container .pitches .item .content p {
+    margin: 0;
+}
+
+.campsite-detail-container .pitches .item .content button {
+}
+
+.campsite-detail-container .features {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.campsite-detail-container .features span {
+    border: 1px solid darkgray;
+    border-radius: 20px;
+    font-size: 14px;
+    padding: 4px 8px;
+    margin: 8px;
+}
+/* campsite detail */
+
+/*booking*/
+.booking-info-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.booking-account-section {
+    border-radius: 20px;
+    border: 1px solid silver;
+    height: auto;
+    width: 100%;
+    padding: 20px;
+}
+.booking-price-section {
+    border-radius: 20px;
+    border: 1px solid silver;
+    height: auto;
+    width: 100%;
+    padding: 20px;
+}
+
+.payment-options-section {
+    display: none;
+    gap: 40px;
+    margin-top: 20px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.billing-section {
+    border-radius: 20px;
+    border: 1px solid silver;
+    height: auto;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.payment-section {
+    border-radius: 20px;
+    border: 1px solid silver;
+    height: auto;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.booking-btn-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+/*booking*/
 
 /* Responsive Styles */
 @media (max-width: 1200px) {
@@ -710,6 +920,7 @@ footer .container {
 
     .hamburger {
         display: inline;
+        color: white;
         margin-top: 8px;
     }
 
@@ -795,6 +1006,57 @@ footer .container {
         row-gap: 40px;
     }
 
+    .campsite-detail-container .pitches {
+        grid-template-columns: 1fr;
+    }
+
+    .campsite-detail-container .pitches .item {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .campsite-detail-container .pitches .item .content {
+        padding: 12px;
+    }
+
+    .booking-info-container {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-options-section {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-section {
+        padding-bottom: 20px;
+    }
+
+    .attractions {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-us-container .user-info {
+        grid-template-columns: 1fr;
+    }
+
+    .tnc-container {
+        grid-template-columns: 1fr;
+    }
+
+    .tnc-pp {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .tnc-pp:hover {
+        font-size: 1.2em;
+        transition: 0.3s;
+    }
+
+    .review-list {
+        grid-template-columns: 1fr;
+    }
+
     .review-section {
         grid-template-columns: 1fr;
     }
@@ -852,73 +1114,6 @@ footer .container {
 
 /* rating */
 
-/* campsite detail */
-.campsite-detail-container {
-    grid-column: 2 / 3;
-    margin-top: 20px;
-}
-
-.campsite-detail-container .map {
-    width: 100%;
-    height: 500px;
-    border-radius: 10px;
-}
-
-.campsite-detail-container .image {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.campsite-detail-container .pitches {
-    width: 100%;
-    gap: 20px;
-}
-
-.campsite-detail-container .pitches .item {
-    border: 1px solid silver;
-    border-radius: 8px;
-    width: 100%;
-    height: auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
-}
-
-.campsite-detail-container .pitches .item .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.campsite-detail-container .pitches .item .content {
-    height: 100%;
-    border-radius: 10px;
-}
-
-.campsite-detail-container .pitches .item .content p {
-    margin: 0;
-}
-
-.campsite-detail-container .pitches .item .content button {
-}
-
-.campsite-detail-container .features {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.campsite-detail-container .features span {
-    border: 1px solid darkgray;
-    border-radius: 20px;
-    font-size: 14px;
-    padding: 4px 8px;
-    margin: 8px;
-}
-/* campsite detail */
-
 /* attraction list */
 .flex-container {
     display: flex;
@@ -945,40 +1140,6 @@ footer .container {
 }
 /* attraction list */
 
-
-/* attraction list */
-.attractions {
-    width: 100%;
-    gap: 20px;
-}
-
-.attractions .item {
-    border: 1px solid silver;
-    text-align: center;
-    border-radius: 8px;
-    width: 100%;
-    height: auto;
-}
-
-.attractions .item img {
-    width: 100%;
-    border-radius: 0px;
-}
-
-.attractions .item .content {
-    margin: 12px;
-}
-
-.attractions .item .content .title {
-    font-size: 1.2em;
-    font-weight: bolder;
-}
-
-.attractions .item .content .distance {
-    margin-top: 20px;
-}
-/* attraction list */
-
 .search-input {
     width: 300px;
     border: none;
@@ -987,15 +1148,13 @@ footer .container {
     border-radius: 20px;
 }
 
-.no-results-container {
+.search-results-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100%;
     width: 100%;
 }
 
-.no-results-container p {
+.search-results-container p {
     text-align: center;
     font-size: 24px;
 }
@@ -1027,78 +1186,6 @@ footer .container {
 
 .login-body .container h1,h3 {
     color: var(--primary);
-}
-
-/*booking price section*/
-.booking-account-section {
-    border-radius: 20px;
-    border: 1px solid silver;
-    height: auto;
-    width: 100%;
-    padding: 20px;
-}
-/*booking price section*/
-
-/*booking price section*/
-.booking-price-section {
-    border-radius: 20px;
-    border: 1px solid silver;
-    height: auto;
-    width: 100%;
-    padding: 20px;
-}
-/*booking price section*/
-
-/*payment info section*/
-
-.payment-options-section {
-    display: none;
-    gap: 40px;
-    margin-top: 20px;
-}
-
-.billing-section {
-    border-radius: 20px;
-    border: 1px solid silver;
-    height: auto;
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-}
-
-.payment-section {
-    border-radius: 20px;
-    border: 1px solid silver;
-    height: auto;
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.booking-btn-container {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-}
-
-/* Contact Us */
-.tnc-pp {
-    border: 1px solid darkgray;
-    border-radius: 20px;
-    padding: 20px 40px;
-    margin: 8px;
-    font-size: 2em;
-    text-decoration: none;
-    color: var(--primary);
-}
-
-.tnc-pp:hover {
-    background-color: var(--secondary);
-    border: none;
-    color: white;
-    font-size: 2.2em;
-    transition: 0.3s;
 }
 
 /*common styles*/
@@ -1309,4 +1396,38 @@ tr:nth-child(even) {
 .visitor-count {
     color: var(--secondary);
     font-weight: bolder;
+}
+
+
+/* Styles for the cookie popup */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.modal-button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }

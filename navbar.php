@@ -15,7 +15,6 @@
     </div>
     <ul id="menu" class="menu">
         <li class="menu-item"><a href="informationpage.php">Information</a></li>
-        <li class="menu-item"><a href="campsitepage.php">Pitch Types</a></li>
         <li class="menu-item"><a href="featurespage.php">Features</a></li>
         <li class="menu-item"><a href="attractionspage.php">Attractions</a></li>
         <li class="menu-item"><a href="reviewpage.php">Reviews</a></li>
