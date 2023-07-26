@@ -28,6 +28,7 @@ body {
 
 .btn-sm-filled {
     min-width: 100px;
+    padding: 8px 16px;
     height: 40px;
     display: inline;
     border-style: none;
@@ -551,31 +552,10 @@ footer .container {
     gap: 100px;
 }
 
-.review-list {}
-
-.write-review-section {
-    margin-top: 40px;
-    border-left: #212121;
-    border-width: 0.5px;
-    border-left-style: solid;
-    border-color: silver;
-}
-
-.write-review-section .content {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.write-review-section .content .title {
-    font-size: 1.5em;
-    font-weight: bolder;
-}
-
 /* Review */
 
 .quote {
-    font-size: 30px;
+    font-size: 2em;
     margin: 0;
     font-weight: bold;
 }
@@ -588,9 +568,11 @@ footer .container {
     content: '"';
 }
 
+.review-list {}
+
 .review-list .item {
-    margin-top: 40px;
     border-radius: 10px;
+    background-color: #fafafa;
 }
 
 .review-list .item .content {
@@ -603,8 +585,8 @@ footer .container {
 }
 
 .review-avatar {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     margin-bottom: 10px;
 }
@@ -619,7 +601,8 @@ footer .container {
 }
 
 .review-name {
-    margin-top: 30px;
+    margin-top: 16px;
+    margin-left: 20px;
 }
 
 .review-name h5 {
@@ -816,13 +799,6 @@ footer .container {
         grid-template-columns: 1fr;
     }
 
-    .write-review-section {
-        border-left: none;
-        border-top-style: solid;
-        margin-bottom: 100px;
-        padding-top: 40px;
-    }
-
     footer .container {
         grid-template-columns: 1fr;
         text-align: center;
@@ -837,13 +813,6 @@ footer .container {
 
     .review-section {
         grid-template-columns: 1fr;
-    }
-
-    .write-review-section {
-        border-left: none;
-        border-top-style: solid;
-        margin-bottom: 100px;
-        padding-top: 40px;
     }
 
     footer .container {
@@ -877,6 +846,8 @@ footer .container {
 .rating .star {
     width: 20px;
     height: 20px;
+    margin: 0 4px;
+    color: var(--secondary);
 }
 
 /* rating */
@@ -1007,42 +978,6 @@ footer .container {
     margin-top: 20px;
 }
 /* attraction list */
-
-/* review list */
-.campsite-detail-container .reviews {
-    width: 100%;
-    gap: 40px;
-}
-
-.campsite-detail-container .reviews .item {
-    border-radius: 20px;
-    width: 100%;
-    height: auto;
-    font-size: 18px;
-    background-color: #fafafa;
-}
-
-.campsite-detail-container .reviews .header {
-    display: grid;
-    grid-template-columns: auto 1fr;
-}
-
-.campsite-detail-container .reviews .header img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.campsite-detail-container .reviews .header .content {
-    margin-left: 12px;
-}
-
-.campsite-detail-container .reviews .item .title {
-    margin-bottom: 0;
-    margin-top: 12px;
-    font-weight: bold;
-}
-/* review list */
 
 .search-input {
     width: 300px;

@@ -1,3 +1,10 @@
+<?php
+
+include('db/query.php');
+
+session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
 <header>
@@ -69,7 +78,7 @@
         ?>
     </div>
 </main>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 <script>
     changePageNameFooter("RSS");
 </script>

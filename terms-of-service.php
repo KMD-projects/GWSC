@@ -103,7 +103,7 @@ session_start();
             regards to its conflict of law provisions.</p>
     </div>
 </main>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 <script>
     changePageNameFooter("Terms of Service");
 </script>

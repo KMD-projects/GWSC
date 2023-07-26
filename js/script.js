@@ -238,3 +238,22 @@ function updateBooking(bookingId, status) {
         }
     });
 }
+
+function createReview(campsiteId, userId) {
+    let title = $("#title").val();
+    let message = $("#message").val();
+    $.post({
+        url: "action/createreview.php",
+        data: {
+            title: title,
+            message: message,
+            campsite_id: campsiteId,
+            user_id: userId,
+        },
+        success: function () {
+            $("#title").val("");
+            $("#message").val("");
+            location.reload();
+        }
+    });
+}

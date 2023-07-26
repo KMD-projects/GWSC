@@ -17,7 +17,5 @@ $booking->campsiteId =  mysqli_real_escape_string($connect, $_POST['campsite_id'
 $booking->pitchId =  mysqli_real_escape_string($connect, $_POST['pitch_id']);
 $booking->userId =  mysqli_real_escape_string($connect, $_POST['user_id']);
 
-echo json_encode($booking);
-
 insertBooking($booking);
 exit();

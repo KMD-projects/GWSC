@@ -43,7 +43,7 @@ $attractions = getAllAttractions();
         ?>
     </div>
 </main>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 <script>
     changePageNameFooter("Attractions");
 </script>

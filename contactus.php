@@ -93,7 +93,7 @@ if (isset($_POST['btnSend'])) {
         <a class="tnc-pp" href="terms-of-service.php">Terms of Service</a>
     </div>
 </main>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 <script>
     changePageNameFooter("Contact Us");
 </script>

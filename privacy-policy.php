@@ -161,7 +161,7 @@ session_start();
         <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to <a href="contactus.php">contact us</a>.</p>
     </div>
 </main>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 <script>
     changePageNameFooter("Privacy Policy");
 </script>

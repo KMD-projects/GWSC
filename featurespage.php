@@ -87,7 +87,7 @@ $facilities[] = "Washing and drying machines";
     </div>
 
 </main>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 <script>
     changePageNameFooter("Features");
 </script>

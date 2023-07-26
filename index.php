@@ -2,9 +2,13 @@
 session_start();
 
 include('db/query.php');
+include ('ipaddr.php');
 
 $campsites = getCampsites();
 $popularCampsites = array_slice($campsites, 0, 2);
+
+$visitedIp = getUserIpAddr();
+insertVisitedIp($visitedIp);
 ?>
 
 <!DOCTYPE html>
@@ -74,29 +78,29 @@ $popularCampsites = array_slice($campsites, 0, 2);
     <section class="grid-2-3">
         <h1>Popular Campsites</h1>
         <div class="campsite-list">
-        <?php
-        foreach ($popularCampsites as $campsite) {
-            echo '<div class="item">';
-            echo '<img alt="campsite image" class="image" src="' . $campsite->image . '">';
-            echo '<p class="name">' . $campsite->name . '</p>';
-            echo '<span class="pitch-type">';
-            echo $campsite->tentCapacity . ' Tents';
-            echo '</span>';
-            echo '<span class="pitch-type">';
-            echo $campsite->caravanCapacity . ' caravans';
-            echo '</span>';
-            echo '<span class="pitch-type">';
-            echo $campsite->motorHomeCapacity . ' motorhomes';
-            echo '</span>';
-            echo '<div class="description max-lines-2">';
-            echo $campsite->description;
-            echo '</div>';
-            echo '<p><span class="price-small">$' . $campsite->price . '</span></p>';
-            $detailPageUrl = 'campsitedetails.php?campsite_id=' . $campsite->id;
-            echo '<button onclick="window.location.href = \'' . $detailPageUrl . '\';" class="btn-sm-filled">View</button>';
-            echo '</div>';
-        }
-        ?>
+            <?php
+            foreach ($popularCampsites as $campsite) {
+                echo '<div class="item">';
+                echo '<img alt="campsite image" class="image" src="' . $campsite->image . '">';
+                echo '<p class="name">' . $campsite->name . '</p>';
+                echo '<span class="pitch-type">';
+                echo $campsite->tentCapacity . ' Tents';
+                echo '</span>';
+                echo '<span class="pitch-type">';
+                echo $campsite->caravanCapacity . ' caravans';
+                echo '</span>';
+                echo '<span class="pitch-type">';
+                echo $campsite->motorHomeCapacity . ' motorhomes';
+                echo '</span>';
+                echo '<div class="description max-lines-2">';
+                echo $campsite->description;
+                echo '</div>';
+                echo '<p><span class="price-small">$' . $campsite->price . '</span></p>';
+                $detailPageUrl = 'campsitedetails.php?campsite_id=' . $campsite->id;
+                echo '<button onclick="window.location.href = \'' . $detailPageUrl . '\';" class="btn-sm-filled">View</button>';
+                echo '</div>';
+            }
+            ?>
         </div>
     </section>
     <div class="top-brand-section grid-2-3">
@@ -122,7 +126,7 @@ $popularCampsites = array_slice($campsites, 0, 2);
         </div>
     </div>
 </main>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 <script>
     changePageNameFooter("Home");
 </script>

@@ -1,3 +1,7 @@
+<?php
+$visitorCount = getVisitorCount();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +60,9 @@
     </div>
     <div class="notice">
         <span id="page-name"></span>&nbsp;
-        <span id="visitor-count">Visitor count: <span class="visitor-count">10</span></span>
+        <?php
+        echo '<span id="visitor-count">Visitor count: <span class="visitor-count">'.$visitorCount.'</span></span>';
+        ?>
         <div id="google_translate_element"></div>
         <p>&copy; Copyright 2023, Global Wild Swimming and Camping</p>
         <p>This website is for educational purpose only.</p>

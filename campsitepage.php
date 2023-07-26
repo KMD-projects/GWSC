@@ -51,7 +51,7 @@ $campsites = getCampsites();
         ?>
     </div>
 </main>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 <script>
     changePageNameFooter("Campsites");
 </script>

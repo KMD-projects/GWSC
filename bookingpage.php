@@ -187,7 +187,7 @@ $booking = findBooking($pitchId, $user->id)
     </div>
 
 </main>
-<?php include 'footer.html'; ?>
+<?php include 'footer.php'; ?>
 <script>
     changePageNameFooter("Booking");
     const selectElement = document.querySelector("#guest");

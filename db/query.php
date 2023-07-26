@@ -350,22 +350,65 @@ function mapAttraction($row): Attraction
     return $attraction;
 }
 
+function insertReview(Review $review): bool
+{
+    global $connect;
+    $query = "insert into reviews (
+                     title,
+                     message,
+                     user_id,
+                     campsite_id,
+                     date
+                     ) values (
+                               '$review->title',
+                               '$review->description',
+                               '$review->userId',
+                               '$review->campsiteId',
+                               now()
+                               );";
+    return mysqli_query($connect, $query);
+}
+
+function getAllReviews(): array
+{
+    global $connect;
+    $getQuery = "select * from reviews";
+    $result = mysqli_query($connect, $getQuery);
+    return mapReviews($result);
+}
+
 function getReviews($campsiteId): array
 {
+    global $connect;
+    $getQuery = "select * from reviews where campsite_id = '$campsiteId'";
+    $result = mysqli_query($connect, $getQuery);
+    return mapReviews($result);
+}
+
+function mapReviews($result): array
+{
+    $count = mysqli_num_rows($result);
     $reviews = array();
-    for ($i = 0; $i < 10; $i++) {
-        $review = new Review();
-        $review->id = $i;
-        $review->title = "Review " . $i;
-        $review->description = "aadkfjalfjajdskfjasdl;fasdfasdlfajsdfjsa;dfja;sdfj";
-        $review->rating = 3;
-        $timestamp = date('Y-m-d H:i:s');
-        $review->date = $timestamp;
-        $review->userId = 1;
-        $review->campsiteId = $campsiteId;
+    for ($i = 0; $i < $count; $i++) {
+        $row = mysqli_fetch_array($result);
+        $review = mapReview($row);
         $reviews[] = $review;
     }
     return $reviews;
+}
+
+function mapReview($row): Review
+{
+    $review = new Review();
+    $review->id = $row['id'];
+    $review->title = $row['title'];
+    $review->description = $row['message'];
+    $review->userId = $row['user_id'];
+    $user = getCustomerProfile($review->userId);
+    $review->username = $user->firstname;
+    $review->campsiteId = $row['campsite_id'];
+    $review->date = $row['date'];
+    return $review;
 }
 
 function insertFeature(Feature $feature): bool
@@ -520,4 +563,24 @@ function insertContactUs($userId, $subject, $message): bool
     global $connect;
     $query = "insert into contact_messages (user_id, subject, message) values ('$userId', '$subject', '$message');";
     return mysqli_query($connect, $query);
+}
+
+function insertVisitedIp($ip)
+{
+    global $connect;
+    $getQuery = "select * from visited_ips where ip = '$ip';";
+    $getResult = mysqli_query($connect, $getQuery);
+
+    if (mysqli_num_rows($getResult) == 0) {
+        $query = "insert into visited_ips (ip) values ('$ip');";
+        mysqli_query($connect, $query);
+    }
+}
+
+function getVisitorCount(): int
+{
+    global $connect;
+    $getQuery = "select * from visited_ips";
+    $getResult = mysqli_query($connect, $getQuery);
+    return mysqli_num_rows($getResult);
 }

@@ -202,3 +202,43 @@ function createContactMessageTable() {
         echo "<p>Contact Message table failed to create.</p>";
     }
 }
+
+function createVisitedIpTable() {
+    global $connect;
+    $query = "CREATE TABLE visited_ips
+    (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        ip TEXT
+    )";
+
+    $result = mysqli_query($connect, $query);
+    if ($result) {
+        echo "<p>Visited IP table created!</p>";
+    } else {
+        echo "<p>Visited IP table failed to create.</p>";
+    }
+}
+
+function createReviewTable() {
+    global $connect;
+    $query = "CREATE TABLE reviews
+    (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        title TEXT,
+        message TEXT,
+        user_id int,
+        campsite_id int,
+        date DATE,
+        FOREIGN KEY (campsite_id) REFERENCES campsites(id),
+        FOREIGN KEY (user_id) REFERENCES customers(customer_id)
+    )";
+
+    $result = mysqli_query($connect, $query);
+    if ($result) {
+        echo "<p>Review table created!</p>";
+    } else {
+        echo "<p>Review table failed to create.</p>";
+    }
+}
+
+createReviewTable();
