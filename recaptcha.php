@@ -1,11 +1,9 @@
 <?php
 
 $dataSiteKey = "6Lc0n40mAAAAAECs8_IY2TpqCPNNa57PBcC4A1qV";
-function processRecaptcha(): string
+function processRecaptcha($responseToken): string
 {
-    if (isset($_POST['g-recaptcha-response'])) {
-        $captcha = $_POST['g-recaptcha-response'];
-    }
+    $captcha = $responseToken;
 
     if (!$captcha) {
         return "Please check the the captcha form.";

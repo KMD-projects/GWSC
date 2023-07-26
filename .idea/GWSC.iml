@@ -8,5 +8,6 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="9cfc40fa5c" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="api" level="application" />
   </component>
 </module>

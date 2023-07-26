@@ -20,6 +20,67 @@ $("#hamburger").click(function(){
     }
 });
 
+function startTimer() {
+
+    $("#btn-login").hide();
+    $("#error").show();
+
+    let date = new Date();
+    let month = date.getMonth() + 1;
+    let hour = date.getHours();
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let minutes = date.getMinutes();
+    let second = date.getSeconds() + 10;
+    let time = hour + ":" + minutes + ":" + second;
+    let ResetTime = new Date(month + " " + day + " " + year + " " + time).getTime();
+    let x = setInterval(function ()//1000 milliseconds = 1 second
+    {
+        let now = new Date().getTime();
+        let distance = ResetTime - now;
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));//the largest integer less than or equal to a given number.
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        let currentTime = "Please try again " + minutes + "m " + seconds + "s ";
+        console.log(currentTime);
+        $("#error-text").text(currentTime);
+        if (distance <= 0) {
+            clearInterval(x);
+            $("#btn-login").show();
+            $("#error").hide();
+        }
+    }, 1000);
+}
+
+function login() {
+    $("#error").hide();
+    let email = $("#email").val();
+    let password = $("#password").val();
+    let responseToken = grecaptcha.getResponse();
+    if (email && password) {
+        $.post({
+            url: "action/customerlogin.php",
+            data: {
+                email: email,
+                password: password,
+                response_token: responseToken
+            },
+            success: function (data) {
+                if (data.length !== 0) {
+                    grecaptcha.reset();
+                    if (data === "blocked") {
+                        startTimer();
+                    } else {
+                        $("#error").show();
+                        $("#error-text").text(data);
+                    }
+                } else {
+                    window.location.href = "index.php";
+                }
+            }
+        });
+    }
+}
+
 function togglePaymentInfoVisibility() {
     let view = document.getElementById('payment_section');
     let cardOption = document.getElementById('option_card');
