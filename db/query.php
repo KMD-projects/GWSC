@@ -514,3 +514,10 @@ function mapBooking($row): Booking
     $booking->updatedAt = $row['updated_at'];
     return $booking;
 }
+
+function insertContactUs($userId, $subject, $message): bool
+{
+    global $connect;
+    $query = "insert into contact_messages (user_id, subject, message) values ('$userId', '$subject', '$message');";
+    return mysqli_query($connect, $query);
+}

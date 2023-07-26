@@ -9,10 +9,10 @@ global $connect;
 if (isset($_POST['btnCreate'])) {
 
     $campsite = new Campsite();
-    $campsite->name = $_POST['txtName'];
-    $campsite->location = $_POST['txtLocation'];
-    $campsite->description = $_POST['txtDescription'];
-    $campsite->price = $_POST['txtPrice'];
+    $campsite->name = mysqli_real_escape_string($connect, $_POST['txtName']);
+    $campsite->location = mysqli_real_escape_string($connect, $_POST['txtLocation']);
+    $campsite->description = mysqli_real_escape_string($connect, $_POST['txtDescription']);
+    $campsite->price = mysqli_real_escape_string($connect, $_POST['txtPrice']);
 
     // image
     $imgFileName = $_FILES['photo']['name'];

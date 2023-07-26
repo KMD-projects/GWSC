@@ -3,49 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
 <footer class="grid-container-3">
     <div class="container">
         <div>
+            <h6 class="footer-category">Links</h6>
+            <div>
+                <a href="index.php" class="footer-category-item hover-underline-animation">Home</a><br>
+                <a href="contactus.php" class="footer-category-item hover-underline-animation">Contact Us</a><br>
+                <a href="rsspage.php" class="footer-category-item hover-underline-animation">RSS</a><br>
+            </div>
+        </div>
+        <div>
             <h6 class="footer-category">Information</h6>
             <div>
-                <a href="" class="footer-category-item hover-underline-animation">Camp and Hike</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Climbing</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Travel</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Men</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Women</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Footwear</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Brands</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Sale</a><br>
-            </div>
-        </div>
-        <div>
-            <h6 class="footer-category">Company</h6>
-            <div>
-                <a href="" class="footer-category-item hover-underline-animation">About</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Blog</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Retail Store</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Events</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Promos</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">International</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Gift Certificates</a><br>
-            </div>
-        </div>
-        <div>
-            <h6 class="footer-category">Support</h6>
-            <div>
-                <a href="" class="footer-category-item hover-underline-animation">My Account</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Order Status</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Shipping</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Returns</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">Payment Methods</a><br>
-                <a href="" class="footer-category-item hover-underline-animation">FAQs</a><br>
+                <a href="informationpage.php" class="footer-category-item hover-underline-animation">Information</a><br>
+                <a href="campsitepage.php" class="footer-category-item hover-underline-animation">Pitch Types</a><br>
+                <a href="featurespage.php" class="footer-category-item hover-underline-animation">Features</a><br>
+                <a href="attractionspage.php" class="footer-category-item hover-underline-animation">Attractions</a><br>
+                <a href="reviewpage.php" class="footer-category-item hover-underline-animation">Reviews</a><br>
             </div>
         </div>
         <div>
             <h6 class="footer-category">Contact</h6>
             <div>
+                <a href="https://goo.gl/maps/5yX7xGGcrBwZS7ZV9" target="_blank"
+                   class="footer-category-item hover-underline-animation">
+                    Location
+                </a><br>
                 <a href="mailto:contact@gwsc.com" target="_blank"
                    class="footer-category-item hover-underline-animation">Email Us</a><br>
                 <a href="" class="footer-category-item hover-underline-animation">Live Chat</a><br>
@@ -57,19 +45,27 @@
             <h6 class="footer-category">Social</h6>
             <div>
                 <a href="https://www.facebook.com/" target="_blank"
-                   class="footer-category-item hover-underline-animation">Facebook</a><br>
-                <a href="https://www.instagram.com/" target="_blank"
-                   class="footer-category-item hover-underline-animation">Instagram</a><br>
+                   class="footer-category-item hover-underline-animation"><i class="fa-brands fa-facebook"></i> Facebook</a><br>
                 <a href="https://twitter.com/" target="_blank"
-                   class="footer-category-item hover-underline-animation">Twitter</a><br>
+                   class="footer-category-item hover-underline-animation"><i class="fa-brands fa-twitter"></i> Twitter</a><br>
+                <a href="https://www.instagram.com/" target="_blank"
+                   class="footer-category-item hover-underline-animation"><i class="fa-brands fa-instagram"></i> Instagram</a><br>
+
             </div>
         </div>
     </div>
     <div class="notice">
-        <p id="page-name"></p>
+        <span id="page-name"></span>&nbsp;
+        <span id="visitor-count">Visitor count: <span class="visitor-count">10</span></span>
+        <div id="google_translate_element"></div>
         <p>&copy; Copyright 2023, Global Wild Swimming and Camping</p>
         <p>This website is for educational purpose only.</p>
     </div>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
 </footer>
 </body>
 </html>

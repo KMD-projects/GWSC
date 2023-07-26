@@ -56,16 +56,16 @@ $reviews = getReviews("");
             <div class="content">
                 <p class="title">Write your own review</p>
                 <form>
-                    <label class="review-input-label" for="firstname">First name</label><br>
-                    <input type="text" id="firstname" class="styled-input" placeholder="First name" required><br><br>
-                    <label class="review-input-label" for="lastname">Last name</label><br>
-                    <input type="text" id="lastname" class="styled-input" placeholder="Last name" required><br><br>
-                    <label class="review-input-label" for="email">Email address</label><br>
-                    <input type="email" id="email" class="styled-input" placeholder="Email" required><br><br>
-                    <label class="review-input-label" for="subject">Subject</label><br>
-                    <input type="text" id="subject" class="styled-input" placeholder="Subject" required><br><br>
-                    <label class="review-input-label" for="message">Review</label><br>
-                    <textarea id="message" placeholder="Type your review" class="styled-textarea"
+                    <label class="gwsc-input-label" for="firstname">First name</label><br>
+                    <input type="text" id="firstname" class="gwsc-input-filled" placeholder="First name" required><br><br>
+                    <label class="gwsc-input-label" for="lastname">Last name</label><br>
+                    <input type="text" id="lastname" class="gwsc-input-filled" placeholder="Last name" required><br><br>
+                    <label class="gwsc-input-label" for="email">Email address</label><br>
+                    <input type="email" id="email" class="gwsc-input-filled" placeholder="Email" required><br><br>
+                    <label class="gwsc-input-label" for="subject">Subject</label><br>
+                    <input type="text" id="subject" class="gwsc-input-filled" placeholder="Subject" required><br><br>
+                    <label class="gwsc-input-label" for="message">Review</label><br>
+                    <textarea id="message" placeholder="Type your review" class="gwsc-textarea"
                               required></textarea><br><br>
                     <button type="submit" class="btn-sm-filled">Send</button>
                 </form>

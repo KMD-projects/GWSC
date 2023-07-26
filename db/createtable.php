@@ -183,3 +183,22 @@ function createBookingTable() {
         echo "<p>Booking table failed to create.</p>";
     }
 }
+
+function createContactMessageTable() {
+    global $connect;
+    $query = "CREATE TABLE contact_messages
+    (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        subject TEXT,
+        message TEXT,
+        user_id INT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES customers(customer_id)
+    )";
+
+    $result = mysqli_query($connect, $query);
+    if ($result) {
+        echo "<p>Contact Message table created!</p>";
+    } else {
+        echo "<p>Contact Message table failed to create.</p>";
+    }
+}

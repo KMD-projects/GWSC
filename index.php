@@ -120,10 +120,6 @@ $popularCampsites = array_slice($campsites, 0, 2);
             <input class="search-input" type="text" name="query" placeholder="Your email" required>
             <button type="submit" class="btn-sm-outlined-white">Sign up</button>
         </div>
-<!--        <div class="signup">-->
-<!--            <input class="styled-input-2" type="email" id="signup-email" name="email" placeholder="Your email">-->
-<!--            <button type="submit" class="rounded-border-button">Sign up</button><br><br>-->
-<!--        </div>-->
     </div>
 </main>
 <?php include 'footer.html'; ?>

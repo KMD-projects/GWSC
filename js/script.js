@@ -1,27 +1,23 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // JavaScript for auto image slider
-    // var images = document.querySelectorAll('.banner-image');
-    // var currentImageIndex = 0;
-    // var intervalTime = 3000; // Time between slides (in milliseconds)
-    //
-    // function changeImage() {
-    //     // Hide current image
-    //     images[currentImageIndex].style.opacity = 0;
-    //
-    //     // Increment index for next image
-    //     currentImageIndex++;
-    //
-    //     // Reset index if it exceeds the number of images
-    //     if (currentImageIndex >= images.length) {
-    //         currentImageIndex = 0;
-    //     }
-    //
-    //     // Display next image
-    //     images[currentImageIndex].style.opacity = 1;
-    // }
-    //
-    // // Start auto image slider
-    // setInterval(changeImage, intervalTime);
+    googleTranslateElementInit();
+});
+
+$("#hamburger").click(function(){
+    let icon = $("#hamburger");
+    let menu = $("#menu");
+    if (icon.hasClass("fa-xmark")) {
+        icon.removeClass("fa-xmark");
+        icon.addClass("fa-bars");
+
+        menu.removeClass("menu-responsive");
+        menu.addClass("menu");
+    } else {
+        icon.removeClass("fa-bars");
+        icon.addClass("fa-xmark");
+
+        menu.removeClass("menu");
+        menu.addClass("menu-responsive");
+    }
 });
 
 function togglePaymentInfoVisibility() {
@@ -37,7 +33,7 @@ function togglePaymentInfoVisibility() {
 
 function changePageNameFooter(currentPage) {
     const element = document.getElementById("page-name")
-    element.innerHTML = `You are at <strong><u>${currentPage}</u></strong> page.`;
+    element.innerHTML = `You are at <span class="visitor-count"><u>${currentPage}</u></span> page.`;
 }
 
 function navigateToAddPitch(campsiteId) {
