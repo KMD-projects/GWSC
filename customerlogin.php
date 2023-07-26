@@ -46,5 +46,8 @@ global $connect, $dataSiteKey;
     <span class="block center-text margin-top-18">Don't have an account yet?</span>
     <button class="btn-lg-outlined margin-top-8" onclick="location.href='customerregister.php'">Register</button>
 </main>
+<script type="text/javascript">
+    checkLoginBlock();
+</script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    googleTranslateElementInit();
+
 });
 
 $("#hamburger").click(function(){
@@ -20,35 +20,68 @@ $("#hamburger").click(function(){
     }
 });
 
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return null;
+}
+
+function setCookie(cname, cvalue, expireMinute) {
+    const d = new Date();
+    d.setMinutes(d.getMinutes() + expireMinute);
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function setLoginBlock() {
+    const d = new Date();
+    d.setMinutes(d.getMinutes() + 10);
+    setCookie("login-block", d.toISOString(), 10);
+}
+
+function shouldBlockLogin() {
+    let cookie = getCookie("login-block");
+    return cookie != null;
+}
+function checkLoginBlock() {
+    if (shouldBlockLogin()) {
+        startTimer();
+    }
+}
+
 function startTimer() {
 
     $("#btn-login").hide();
     $("#error").show();
 
-    let date = new Date();
-    let month = date.getMonth() + 1;
-    let hour = date.getHours();
-    let day = date.getDate();
-    let year = date.getFullYear();
-    let minutes = date.getMinutes();
-    let second = date.getSeconds() + 10;
-    let time = hour + ":" + minutes + ":" + second;
-    let ResetTime = new Date(month + " " + day + " " + year + " " + time).getTime();
-    let x = setInterval(function ()//1000 milliseconds = 1 second
+    let cookie = getCookie("login-block");
+    let future = new Date(cookie);
+
+    let x = setInterval(function ()
     {
-        let now = new Date().getTime();
-        let distance = ResetTime - now;
-        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));//the largest integer less than or equal to a given number.
-        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        let currentTime = "Please try again " + minutes + "m " + seconds + "s ";
-        console.log(currentTime);
+        let now = new Date();
+        let diff = future - now;
+        let remaining = new Date(diff);
+
+        let currentTime = `Please try again in ${remaining.getMinutes()}m ${remaining.getSeconds()}s`;
+
         $("#error-text").text(currentTime);
-        if (distance <= 0) {
+        if (diff <= 0) {
             clearInterval(x);
             $("#btn-login").show();
             $("#error").hide();
         }
-    }, 1000);
+    }, 300);
 }
 
 function login() {
@@ -68,6 +101,7 @@ function login() {
                 if (data.length !== 0) {
                     grecaptcha.reset();
                     if (data === "blocked") {
+                        setLoginBlock();
                         startTimer();
                     } else {
                         $("#error").show();
@@ -156,7 +190,6 @@ function createFeature() {
             feature_name: featureName
         },
         success: function () {
-            console.log(`Success`);
             location.reload();
         }
     });
@@ -164,15 +197,10 @@ function createFeature() {
 
 function createBooking(campsiteId, pitchId, userId) {
     let guestCount = $("#guest").val();
-    console.log(`guestCount: ${guestCount}`);
     let pitchPrice = $("#price").text();
-    console.log(`pitchPrice: ${pitchPrice}`);
     let taxPrice = $("#tax-fee").text();
-    console.log(`taxPrice: ${taxPrice}`);
     let serviceFee = $("#service-fee").text();
-    console.log(`serviceFee: ${serviceFee}`);
     let totalPrice = $("#total-fee").text();
-    console.log(`totalPrice: ${totalPrice}`);
     $.post({
         url: "action/createbooking.php",
         data: {
@@ -186,7 +214,6 @@ function createBooking(campsiteId, pitchId, userId) {
             user_id: userId,
         },
         success: function () {
-            console.log(`Success`);
         }
     });
 }
@@ -207,7 +234,6 @@ function updateBooking(bookingId, status) {
             booking_status: status
         },
         success: function () {
-            console.log(`Success`);
             location.reload();
         }
     });
