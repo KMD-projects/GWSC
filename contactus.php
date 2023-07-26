@@ -37,6 +37,7 @@ if (isset($_POST['btnSend'])) {
     <title>Contact Us</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/9cfc40fa5c.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 

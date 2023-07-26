@@ -2,23 +2,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-$("#hamburger").click(function(){
-    let icon = $("#hamburger");
-    let menu = $("#menu");
-    if (icon.hasClass("fa-xmark")) {
-        icon.removeClass("fa-xmark");
-        icon.addClass("fa-bars");
-
-        menu.removeClass("menu-responsive");
-        menu.addClass("menu");
-    } else {
-        icon.removeClass("fa-bars");
-        icon.addClass("fa-xmark");
-
-        menu.removeClass("menu");
-        menu.addClass("menu-responsive");
-    }
+$( document ).ready(function() {
+    setupMenuClick();
 });
+
+function setupMenuClick() {
+    $("#hamburger").click(function(){
+        let icon = $("#hamburger");
+        let menu = $("#menu");
+        if (icon.hasClass("fa-xmark")) {
+            icon.removeClass("fa-xmark");
+            icon.addClass("fa-bars");
+
+            menu.removeClass("menu-responsive");
+            menu.addClass("menu");
+        } else {
+            icon.removeClass("fa-bars");
+            icon.addClass("fa-xmark");
+
+            menu.removeClass("menu");
+            menu.addClass("menu-responsive");
+        }
+    });
+}
 
 function getCookie(cname) {
     let name = cname + "=";
