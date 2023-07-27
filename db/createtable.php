@@ -26,6 +26,8 @@ function createCustomerTable()
     }
 }
 
+createReviewTable();
+
 function createAdminTable()
 {
     global $connect;
@@ -240,5 +242,3 @@ function createReviewTable() {
         echo "<p>Review table failed to create.</p>";
     }
 }
-
-createReviewTable();

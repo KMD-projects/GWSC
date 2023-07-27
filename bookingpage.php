@@ -109,7 +109,7 @@ $booking = findBooking($pitchId, $user->id)
                 <div class="grid-container-2 grid-gap-16">
                     <div>
                         <label for="first-name" class="block gwsc-input-label">First Name*</label>
-                        <input class="gwsc-input-filled-full-width margin-top-4" id="first-name" type="number"
+                        <input class="gwsc-input-filled-full-width margin-top-4" id="first-name" type="text"
                                name="txtFirstName" placeholder="John"
                                required/>
                     </div>
@@ -121,14 +121,14 @@ $booking = findBooking($pitchId, $user->id)
                     </div>
                 </div>
                 <label for="address" class="block gwsc-input-label margin-top-8">Address*</label>
-                <input class="gwsc-input-filled-full-width margin-top-4" id="address" type="number"
+                <input class="gwsc-input-filled-full-width margin-top-4" id="address" type="text"
                        name="txtAddress" placeholder="Address"
                        required/>
 
                 <div class="grid-container-2 grid-gap-16 margin-top-8">
                     <div>
                         <label for="state-province" class="block gwsc-input-label">State/Province*</label>
-                        <input class="gwsc-input-filled-full-width margin-top-4" id="state-province" type="number"
+                        <input class="gwsc-input-filled-full-width margin-top-4" id="state-province" type="text"
                                name="txtStateProvince" placeholder="Yangon"
                                required/>
                     </div>
@@ -144,7 +144,7 @@ $booking = findBooking($pitchId, $user->id)
                     <div>
 
                         <label for="country" class="block gwsc-input-label">Country*</label>
-                        <input class="gwsc-input-filled-full-width margin-top-4" id="country" type="number"
+                        <input class="gwsc-input-filled-full-width margin-top-4" id="country" type="text"
                                name="txtCountry" placeholder="Myanmar"
                                required/>
                     </div>

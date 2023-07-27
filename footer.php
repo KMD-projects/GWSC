@@ -59,7 +59,7 @@ $visitorCount = getVisitorCount();
         </div>
     </div>
     <div class="notice">
-        <span id="page-name"></span>&nbsp;
+        <span id="page-name"></span>
         <?php
         echo '<span id="visitor-count">Visitor count: <span class="visitor-count">'.$visitorCount.'</span></span>';
         ?>
